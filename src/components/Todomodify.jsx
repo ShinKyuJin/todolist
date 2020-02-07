@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { modifyTodo } from '../actions';
 
 class Todomodify extends React.Component {
@@ -23,7 +24,7 @@ class Todomodify extends React.Component {
 
   handleClick = () => {
     const { itemId, subject, detail } = this.state;
-    const { modifyTodo, history } = this.props;
+    const { history } = this.props;
     // eslint-disable-next-line radix
     modifyTodo(parseInt(itemId), subject, detail);
     history.goBack();
@@ -62,6 +63,10 @@ class Todomodify extends React.Component {
     );
   }
 }
+
+Todomodify.propTypes = {
+  todoList: PropTypes.arrayOf.isRequired,
+};
 
 const mapStateToProps = (state) => ({
   todoList: state.todoApp.todoList,

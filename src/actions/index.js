@@ -1,7 +1,8 @@
 let todoId = 2;
 export const addTodo = (subject, detail) => ({
   type: 'ADD_TODO',
-  itemId: todoId,
+  // eslint-disable-next-line no-plusplus
+  itemId: todoId++,
   subject,
   detail,
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { addTodo } from 'actions';
+import { addTodo } from '../actions';
 import './Form.scss';
 
 class Form extends React.Component {
@@ -20,7 +20,6 @@ class Form extends React.Component {
 
   handleCreate = () => {
     const { subject, detail } = this.state;
-    const { addTodo } = this.props;
     addTodo(subject, detail);
     this.setState({
       subject: '',
