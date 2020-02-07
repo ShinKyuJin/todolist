@@ -20,6 +20,7 @@ class Form extends React.Component {
 
   handleCreate = () => {
     const { subject, detail } = this.state;
+    const { addTodo } = this.props;
     addTodo(subject, detail);
     this.setState({
       subject: '',

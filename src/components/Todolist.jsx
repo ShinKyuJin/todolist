@@ -1,16 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 import Todo from './Todo';
 
 import { toggleTodo, removeTodo } from '../actions';
 
 class Todolist extends React.Component {
   handleToggle = (itemId) => {
+    const { toggleTodo } = this.props;
     toggleTodo(itemId);
   };
 
   handleRemove = (itemId) => {
+    const { removeTodo } = this.props;
     removeTodo(itemId);
   };
 
@@ -33,10 +34,6 @@ class Todolist extends React.Component {
     return <div className="wrapper">{mappingList}</div>;
   }
 }
-
-Todolist.propTypes = {
-  todoList: PropTypes.arrayOf.isRequired,
-};
 
 const mapStateToProps = (state) => ({
   todoList: state.todoApp.todoList,
