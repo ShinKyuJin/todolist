@@ -1,0 +1,21 @@
+.todo-wrapper {
+    .subject {
+        font-size:24px;
+        display:inline-block;
+    }
+    .detail {
+        font-size:16px;
+        color:#555;
+    }
+    &:hover {
+        background-color: darken($color: white, $amount: 10);
+        cursor:pointer;
+    }
+    .checked {
+        width:10px;
+        height:10px;
+        background-color: green;
+        display:inline-block;
+    }
+}
+
