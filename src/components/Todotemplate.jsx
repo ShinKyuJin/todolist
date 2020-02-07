@@ -7,9 +7,7 @@ class Todotemplate extends React.Component {
   render() {
     return (
       <div className="whole-wrapper">
-        <div>
-          To-do List
-              </div>
+        <div>To-do List</div>
         <section className="form-wrapper">
           <Form />
         </section>

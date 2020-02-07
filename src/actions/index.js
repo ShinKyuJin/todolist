@@ -1,32 +1,25 @@
 let todoId = 2;
-export const addTodo = (subject, detail) => {
-    return {
-        type: "ADD_TODO",
-        itemId: todoId++,
-        subject: subject,
-        detail: detail,
-    };
-};
-
-export const toggleTodo = (itemId) => {
-    return {
-        type: "TOGGLE_TODO",
-        itemId: itemId,
-    };
-};
-
-export const removeTodo = (itemId) => {
-    return {
-        type: "REMOVE_TODO",
-        itemId: itemId,
-    }
+export const addTodo = (subject, detail) => ({
+  type: 'ADD_TODO',
+  itemId: todoId,
+  subject,
+  detail,
 }
+);
 
-export const modifyTodo = (itemId, subject, detail) => {
-    return {
-        type: "MODIFY_TODO",
-        itemId: itemId,
-        subject: subject,
-        detail: detail,
-    }
-}
+export const toggleTodo = (itemId) => ({
+  type: 'TOGGLE_TODO',
+  itemId,
+});
+
+export const removeTodo = (itemId) => ({
+  type: 'REMOVE_TODO',
+  itemId,
+});
+
+export const modifyTodo = (itemId, subject, detail) => ({
+  type: 'MODIFY_TODO',
+  itemId,
+  subject,
+  detail,
+});
