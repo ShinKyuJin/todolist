@@ -16,7 +16,8 @@ class Todolist extends React.Component {
   };
 
   render() {
-    const todoList = this.props.todoList.map(({
+    const { todoList } = this.props;
+    const mappingList = todoList.map(({
       itemId, subject, detail, checked,
     }) => (
       <Todo
@@ -30,10 +31,9 @@ class Todolist extends React.Component {
       />
     ));
 
-    return <div className="wrapper">{todoList}</div>;
+    return <div className="wrapper">{mappingList}</div>;
   }
 }
-
 
 const mapStateToProps = (state) => ({
   todoList: state.todoApp.todoList,
