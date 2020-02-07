@@ -1,23 +1,26 @@
 import React from 'react';
 import './Todo.scss';
+import { Link } from 'react-router-dom';
 
 class Todo extends React.Component {
     render() {
-        const {subject,detail,checked,onToggle,onRemove} = this.props;
+        const { itemId, subject, detail, checked, onToggle, onRemove } = this.props;
         return (
-            <div className="todo-wrapper" onClick={() => onToggle(subject)}>
+            <div className="todo-wrapper">
                 <div className="subject">
                     {subject}
                 </div>
                 <div className="detail">
                     {detail}
                 </div>
+                <Link to={`${itemId}`}>수정</Link>
+                <button onClick={() => onToggle(itemId)}>끝냄</button>
                 <div>
                     {
                         checked && (<div className="checked"></div>)
                     }
                 </div>
-                <button onClick={() => onRemove(subject)}>
+                <button onClick={() => onRemove(itemId)}>
                     X
                 </button>
             </div>

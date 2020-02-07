@@ -1,22 +1,23 @@
-import {combineReducers} from 'redux';
+import { combineReducers } from 'redux';
 
 const initialState = {
     todoList: [
-        {subject:'12',detail:'123',checked:false,},
-        {subject:'123',detail:'123',checked:true,},
+        { itemId: 0, subject: '12', detail: '123', checked: false, },
+        { itemId: 1, subject: '123', detail: '123', checked: true, },
     ],
 }
 
-const todoApp = (state=initialState,action) => {
-    switch(action.type) {
-        case "ADD_TODO" : {
+const todoApp = (state = initialState, action) => {
+    switch (action.type) {
+        case "ADD_TODO": {
             return {
                 ...state,
-                todoList:state.todoList.concat(
+                todoList: state.todoList.concat(
                     {
-                        subject:action.subject,
-                        detail:action.detail,
-                        checked:false,
+                        itemId: action.itemId,
+                        subject: action.subject,
+                        detail: action.detail,
+                        checked: false,
                     }
                 )
             }
@@ -24,10 +25,8 @@ const todoApp = (state=initialState,action) => {
         case "TOGGLE_TODO": {
             state.todoList.forEach(
                 (obj) => {
-                    if(obj.subject === action.subject) {
-                        console.log(obj.checked);
+                    if (obj.itemId === action.itemId) {
                         obj.checked = !obj.checked;
-                        console.log(obj.checked);
                     }
                 }
             );
@@ -40,11 +39,25 @@ const todoApp = (state=initialState,action) => {
             return {
                 ...state,
                 todoList: state.todoList.filter(
-                    (val) => val.subject !== action.subject
+                    (val) => val.itemId !== action.itemId
                 ),
             };
         }
-        default : {
+        case "MODIFY_TODO": {
+            state.todoList.forEach(
+                (obj) => {
+                    if (obj.itemId === action.itemId) {
+                        obj.subject = action.subject;
+                        obj.detail = action.detail;
+                    }
+                }
+            )
+            return {
+                ...state,
+                todoList: [...state.todoList],
+            };
+        }
+        default: {
             return state;
         }
     }

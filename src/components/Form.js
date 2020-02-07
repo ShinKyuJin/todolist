@@ -1,6 +1,7 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import { addTodo } from 'actions';
+import './Form.scss';
 
 class Form extends React.Component {
     constructor(props) {
@@ -12,21 +13,26 @@ class Form extends React.Component {
     }
     handleChange = (e) => {
         this.setState({
-            [e.target.name]:e.target.value,
+            [e.target.name]: e.target.value,
         });
     }
     handleCreate = () => {
-        this.props.addTodo(this.state.subject,this.state.detail);
+        this.props.addTodo(this.state.subject, this.state.detail);
         this.setState({
             subject: "",
             detail: "",
         });
     }
+    handleKeyPress = (e) => {
+        if (e.key === 'Enter') {
+            this.handleCreate();
+        }
+    }
     render() {
-        return(
-            <div>
-                <input name="subject"value={this.state.subject} onChange={this.handleChange} />
-                <input name="detail"value={this.state.detail} onChange={this.handleChange} />
+        return (
+            <div className="form">
+                <input className="form-subject" name="subject" value={this.state.subject} onChange={this.handleChange} onKeyPress={this.handleKeyPress} />
+                <input className="form-detail" name="detail" value={this.state.detail} onChange={this.handleChange} onKeyPress={this.handleKeyPress} />
                 <button onClick={this.handleCreate}>추가</button>
             </div>
         );
@@ -35,8 +41,8 @@ class Form extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        state:state
+        state: state
     }
 }
 
-export default connect(mapStateToProps,{addTodo})(Form);
+export default connect(mapStateToProps, { addTodo })(Form);

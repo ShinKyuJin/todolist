@@ -2,20 +2,22 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Todo from './Todo';
 
-import { toggleTodo,removeTodo } from '../actions';
+import { toggleTodo, removeTodo } from '../actions';
 
 class Todolist extends React.Component {
-    handleToggle = (subject) => {
-        this.props.toggleTodo(subject);
+    handleToggle = (itemId) => {
+        this.props.toggleTodo(itemId);
     }
-    handleRemove = (subject) => {
-        this.props.removeTodo(subject);
+    handleRemove = (itemId) => {
+        this.props.removeTodo(itemId);
     }
 
     render() {
         const todoList = this.props.todoList.map(
-            ({ subject, detail, checked }) => (
+            ({ itemId, subject, detail, checked }) => (
                 <Todo
+                    key={itemId}
+                    itemId={itemId}
                     subject={subject}
                     detail={detail}
                     checked={checked}
@@ -38,4 +40,4 @@ const mapStateToProps = (state) => {
     };
 };
 
-export default connect(mapStateToProps, { toggleTodo,removeTodo })(Todolist);
+export default connect(mapStateToProps, { toggleTodo, removeTodo })(Todolist);
