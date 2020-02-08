@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-comment-textnodes */
 import React from 'react';
 import './Todo.scss';
 import { Link } from 'react-router-dom';
@@ -9,13 +10,12 @@ class Todo extends React.Component {
       itemId, subject, detail, checked, onToggle, onRemove,
     } = this.props;
     return (
-      <div className="todo-wrapper">
-        <div className="subject">{subject}</div>
-        <div className="detail">{detail}</div>
-        <Link to={`${itemId}`}>수정</Link>
-        <button type="button" onClick={() => onToggle(itemId)}>끝냄</button>
-        <div>{checked && <div className="checked" />}</div>
-        <button type="button" onClick={() => onRemove(itemId)}>X</button>
+      <div className="todo">
+        <div className={`todo__subject ${checked ? 'todo__checked' : ''}`}>{subject}</div>
+        <div className={`todo__detail ${checked ? 'todo__checked' : ''}`}>{detail}</div>
+        <div className="todo__remove" onClick={() => onRemove(itemId)}>&times;</div>
+        <Link className="todo__modify" to={`${itemId}`}>MOD</Link>
+        <div className="todo__toggle" onClick={() => onToggle(itemId)}>DONE</div>
       </div>
     );
   }

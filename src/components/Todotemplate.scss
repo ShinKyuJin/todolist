@@ -1,11 +1,17 @@
 body {
-    background-color: #FAFAFA;
+    background-color: #EEE;
 }
 .whole-wrapper {
     margin:0 auto;
-    margin-top:100px;
-    width:400px;
-    box-shadow: 4px 3px 3px rgba(0,0,0,0.3);
+    margin-top:4rem;
+    width:512px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
     text-align: center;
-    background-color:skyblue;
+    background-color: white;
+    .app-name {
+        font-size:3em;
+        padding:30px;
+        background-color:#22b8cf;
+        color:white;
+    }
 }

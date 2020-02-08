@@ -12,9 +12,15 @@ class Form extends React.Component {
     };
   }
 
-  handleChange = (e) => {
+  handleChangeSubject = (e) => {
     this.setState({
-      [e.target.name]: e.target.value,
+      subject: e.target.value,
+    });
+  };
+
+  handleChangeDetail = (e) => {
+    this.setState({
+      detail: e.target.value,
     });
   };
 
@@ -39,22 +45,25 @@ class Form extends React.Component {
     return (
       <div className="form">
         <input
-          className="form-subject"
+          className="form__subject"
           name="subject"
           value={subject}
-          onChange={this.handleChange}
+          onChange={this.handleChangeSubject}
           onKeyPress={this.handleKeyPress}
+          placeholder="제목"
         />
         <input
-          className="form-detail"
+          className="form__detail"
           name="detail"
           value={detail}
-          onChange={this.handleChange}
+          onChange={this.handleChangeDetail}
           onKeyPress={this.handleKeyPress}
+          placeholder="내용"
         />
         <button type="button" onClick={this.handleCreate}>
           추가
         </button>
+        <hr />
       </div>
     );
   }

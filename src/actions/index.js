@@ -5,8 +5,7 @@ export const addTodo = (subject, detail) => ({
   itemId: todoId++,
   subject,
   detail,
-}
-);
+});
 
 export const toggleTodo = (itemId) => ({
   type: 'TOGGLE_TODO',

@@ -7,7 +7,6 @@ class Todomodify extends React.Component {
     super(props);
     const { match } = props;
     const { todoList } = this.props;
-
     this.state = {
       itemId: match.params.itemId,
       subject: todoList[match.params.itemId].subject,

@@ -1,24 +1,35 @@
-$btn-background:blueviolet;
-
 .form {
-    .form-subject,.form-detail {
+    padding-bottom:30px;
+    &__subject , &__detail {
+        margin:0 auto;
         display:block;
         border:none;
-        border-bottom:1px solid yellowgreen;
-        width:100%;
+        border-bottom:1px solid #22b8cf;
+        width:80%;
         height:30px;
+        margin-top:5px;
+        font-size:18px;
+        text-align: center;
+        &:focus {
+            outline: none;
+        }
     }
-    .form-subject + .form-detail {
+    &__subject {
+        margin-top:30px;
+    }
+    &__detail {
         margin-top:15px;
+        margin-bottom:20px;
     }
     button {
-        width:100%;
+        width:80%;
         border:none;
-        height:30px;
-        background-color:$btn-background;
+        height:50px;
+        font-size:18px;
+        background-color:#22b8cf;
         color:white;
         &:hover {
-            background-color: darken($btn-background,10);
+            background-color: darken(#22b8cf,5);
             cursor:pointer;
         }
     }
