@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import Todo from './Todo';
+import Todo from 'components/Todo/Todo';
 
-import { toggleTodo, removeTodo } from '../actions';
+import { toggleTodo, removeTodo } from 'actions';
 
 class Todolist extends React.Component {
   handleToggle = (itemId) => {
@@ -19,7 +19,7 @@ class Todolist extends React.Component {
   render() {
     const { todoList } = this.props;
     const mappingList = todoList.map(({
-      itemId, subject, detail, checked,
+      itemId, subject, detail, checked, isdel,
     }) => (
       <Todo
         key={itemId}
@@ -27,6 +27,7 @@ class Todolist extends React.Component {
         subject={subject}
         detail={detail}
         checked={checked}
+        isdel={isdel}
         onToggle={this.handleToggle}
         onRemove={this.handleRemove}
       />

@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { modifyTodo } from '../actions';
+import { modifyTodo } from 'actions';
 
 class Todomodify extends React.Component {
   constructor(props) {
