@@ -7,16 +7,16 @@ import PropTypes from 'prop-types';
 class Todo extends React.Component {
   render() {
     const {
-      itemId, subject, detail, checked, onToggle, onRemove,
+      itemId, subject, detail, checked, isdel, onToggle, onRemove,
     } = this.props;
     return (
-      <div className="todo">
+      <div className={`todo ${isdel ? 'del' : ''}`}>
         <div className={`todo__subject ${checked ? 'todo__checked' : ''}`}>{subject}</div>
         <div className={`todo__detail ${checked ? 'todo__checked' : ''}`}>{detail}</div>
-        <div className="todo__remove" onClick={() => onRemove(itemId)}>&times;</div>
-        <Link className="todo__modify" to={`${itemId}`}>MOD</Link>
-        <div className="todo__toggle" onClick={() => onToggle(itemId)}>DONE</div>
-      </div>
+            <div className="todo__remove" onClick={() => onRemove(itemId)}>&times;</div>
+        <Link className="todo__modify" to={`${itemId}`}>수정</Link>
+            <div className="todo__toggle" onClick={() => onToggle(itemId)}>완료</div>
+     </div>
     );
   }
 }

@@ -1,6 +1,6 @@
 import React from 'react';
-import Form from './Form';
-import Todolist from './Todolist';
+import Form from 'components/Form/Form';
+import Todolist from 'components/Todolist/Todolist';
 import './Todotemplate.scss';
 
 class Todotemplate extends React.Component {
