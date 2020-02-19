@@ -29,7 +29,7 @@ class Todomodify extends React.Component {
   handleClick = () => {
     const { itemId, subject, detail } = this.state;
     const { modifyTodo, history } = this.props;
-    modifyTodo(itemId, subject, detail);
+    modifyTodo(parseInt(itemId, 10), subject, detail);
     history.goBack(-1);
   }
 
@@ -54,25 +54,23 @@ Todomodify.propTypes = {
   match: PropTypes.shape({
     params: PropTypes.object,
   }).isRequired,
-  todoList: PropTypes.func.isRequired,
-  modifyTodo: PropTypes.func.isRequired,
   history: PropTypes.shape({
     goBack: PropTypes.func,
   }).isRequired,
+  todoList: PropTypes.func.isRequired,
+  modifyTodo: PropTypes.func.isRequired,
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    modifyTodo: (itemId, subject, detail) => {
-      dispatch({
-        type: 'MODIFY_TODO',
-        itemId,
-        subject,
-        detail,
-      });
-    },
-  };
-};
+const mapDispatchToProps = (dispatch) => ({
+  modifyTodo: (itemId, subject, detail) => {
+    dispatch({
+      type: 'MODIFY_TODO',
+      itemId,
+      subject,
+      detail,
+    });
+  },
+});
 
 const mapStateToProps = (state) => ({
   todoList: state.todoApp.todoList,
