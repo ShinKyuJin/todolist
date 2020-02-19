@@ -26,7 +26,6 @@ class Form extends React.Component {
 
   handleCreate = () => {
     const { subject, detail } = this.state;
-    const { addTodo } = this.props;
     addTodo(subject, detail);
     this.setState({
       subject: '',
@@ -72,5 +71,10 @@ class Form extends React.Component {
 const mapStateToProps = (state) => ({
   state,
 });
+
+
+const mapDispatchToProps = (dispatch) => ({
+  addTodo: action => dispatch(addTodo(action)),
+})
 
 export default connect(mapStateToProps, { addTodo })(Form);
