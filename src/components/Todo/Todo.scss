@@ -1,7 +1,6 @@
 /*------------------------------------*\
   #TODO-SECTION
 \*------------------------------------*/
-
 $subject-font-size:2rem;
 $detail-font-size:1rem;
 
@@ -23,7 +22,7 @@ $detail-font-size:1rem;
   &__btn-modify, &__btn-toggle, &__btn-remove {
     float: right;
     border: 1px solid black;
-    padding: 5px;
+    height:30px;
     margin-left: 10px;
     cursor: pointer;
   }
@@ -44,7 +43,6 @@ $detail-font-size:1rem;
     text-decoration: none;
     color: black;
     border: 2px solid #555555;
-    
     &:hover {
       background-color: #555555;
       color: white;

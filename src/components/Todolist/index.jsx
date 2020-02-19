@@ -37,7 +37,7 @@ class Todolist extends React.Component {
 Todolist.propTypes = {
   toggleTodo: PropTypes.func.isRequired,
   removeTodo: PropTypes.func.isRequired,
-  todoList: PropTypes.arrayOf.isRequired,
+  todoList: PropTypes.objectOf.isRequired,
 };
 
 const mapStateToProps = (state) => ({

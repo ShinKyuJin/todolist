@@ -1,63 +1,50 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { modifyTodo } from '../../actions';
-
+import PropTypes from 'prop-types';
 
 class Todomodify extends React.Component {
   constructor(props) {
     super(props);
-    const { match } = props;
-    const { todoList } = this.props;
+    const { match, todoList } = this.props;
+    const { itemId } = match.params;
     this.state = {
-      itemId: match.params.itemId,
-      subject: todoList[match.params.itemId].subject,
-      detail: todoList[match.params.itemId].detail,
+      itemId,
+      subject: todoList[itemId].subject,
+      detail: todoList[itemId].detail,
     };
   }
 
-  handleChange = (e) => {
+  handleChangeSubject = (e) => {
     this.setState({
-      [e.target.name]: e.target.value,
+      subject: e.target.value,
     });
-  };
+  }
+
+  handleChangeDetail = (e) => {
+    this.setState({
+      detail: e.target.value,
+    });
+  }
 
   handleClick = () => {
     const { itemId, subject, detail } = this.state;
-    const { history, dispatch } = this.props;
-    dispatch(modifyTodo(itemId, subject, detail));
-    history.goBack();
-  };
-
-  handleKeyPress = (e) => {
-    if (e.key === 'Enter') {
-      this.handleClick();
-    }
-  };
+    const { modifyTodo, history } = this.props;
+    modifyTodo(itemId, subject, detail);
+    history.goBack(-1);
+  }
 
   render() {
     const { subject, detail } = this.state;
+    const {
+      handleChangeSubject,
+      handleChangeDetail,
+      handleClick,
+    } = this;
     return (
       <div>
-        <input
-          type="text"
-          name="subject"
-          value={subject}
-          onChange={this.handleChange}
-          onKeyPress={this.handleKeyPress}
-          // eslint-disable-next-line jsx-a11y/no-autofocus
-          autoFocus
-        />
-        <input
-          type="text"
-          name="detail"
-          value={detail}
-          onChange={this.handleChange}
-          onKeyPress={this.handleKeyPress}
-        />
-        <button type="button" onClick={this.handleClick}>
-          완료
-        </button>
+        <input value={subject} onChange={handleChangeSubject} />
+        <input value={detail} onChange={handleChangeDetail} />
+        <button type="button" onClick={handleClick}>완료</button>
       </div>
     );
   }
@@ -65,22 +52,30 @@ class Todomodify extends React.Component {
 
 Todomodify.propTypes = {
   match: PropTypes.shape({
-    params: PropTypes.shape({
-      itemId: PropTypes.number.isRequired,
-    }),
+    params: PropTypes.object,
   }).isRequired,
-  todoList: PropTypes.arrayOf.isRequired,
+  todoList: PropTypes.func.isRequired,
+  modifyTodo: PropTypes.func.isRequired,
   history: PropTypes.shape({
-    goBack: PropTypes.func.isRequired,
-  }),
+    goBack: PropTypes.func,
+  }).isRequired,
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    modifyTodo: (itemId, subject, detail) => {
+      dispatch({
+        type: 'MODIFY_TODO',
+        itemId,
+        subject,
+        detail,
+      });
+    },
+  };
 };
 
 const mapStateToProps = (state) => ({
   todoList: state.todoApp.todoList,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  modifyTodo: (itemId, subject, detail) => dispatch(modifyTodo(itemId, subject, detail)),
-});
-
-export default connect(mapStateToProps, { modifyTodo })(Todomodify);
+export default connect(mapStateToProps, mapDispatchToProps)(Todomodify);

@@ -64,7 +64,13 @@ Form.propTypes = {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addTodo: (subject, detail) => { dispatch({ type: 'ADD_TODO', subject, detail }); },
+    addTodo: (subject, detail) => {
+      dispatch({
+        type: 'ADD_TODO',
+        subject,
+        detail,
+      });
+    },
   };
 };
 
