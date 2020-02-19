@@ -1,6 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { modifyTodo } from '../actions';
+import { modifyTodo } from '../../actions';
+
 
 class Todomodify extends React.Component {
   constructor(props) {
@@ -22,9 +24,8 @@ class Todomodify extends React.Component {
 
   handleClick = () => {
     const { itemId, subject, detail } = this.state;
-    const { modifyTodo, history } = this.props;
-    // eslint-disable-next-line radix
-    modifyTodo(parseInt(itemId), subject, detail);
+    const { history, dispatch } = this.props;
+    dispatch(modifyTodo(itemId, subject, detail));
     history.goBack();
   };
 
@@ -62,8 +63,24 @@ class Todomodify extends React.Component {
   }
 }
 
+Todomodify.propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      itemId: PropTypes.number.isRequired,
+    }),
+  }).isRequired,
+  todoList: PropTypes.arrayOf.isRequired,
+  history: PropTypes.shape({
+    goBack: PropTypes.func.isRequired,
+  }),
+};
+
 const mapStateToProps = (state) => ({
   todoList: state.todoApp.todoList,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  modifyTodo: (itemId, subject, detail) => dispatch(modifyTodo(itemId, subject, detail)),
 });
 
 export default connect(mapStateToProps, { modifyTodo })(Todomodify);

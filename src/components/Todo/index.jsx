@@ -13,9 +13,9 @@ class Todo extends React.Component {
       <div className="todo">
         <div className={`todo__subject ${checked ? 'todo__checked' : ''}`}>{subject}</div>
         <div className={`todo__detail ${checked ? 'todo__checked' : ''}`}>{detail}</div>
-        <div className="todo__remove" onClick={() => onRemove(itemId)}>&times;</div>
-        <Link className="todo__modify" to={`${itemId}`}>MOD</Link>
-        <div className="todo__toggle" onClick={() => onToggle(itemId)}>DONE</div>
+        <div className="todo__btn-remove" onClick={() => onRemove(itemId)}>&times;</div>
+        <Link className="todo__btn-modify" to={`${itemId}`}>MOD</Link>
+        <div className="todo__btn-toggle" onClick={() => onToggle(itemId)}>DONE</div>
       </div>
     );
   }
