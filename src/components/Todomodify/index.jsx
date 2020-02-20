@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { modifyTodo } from '../../actions';
+import './Todomodify.scss';
 
 class Todomodify extends React.Component {
   constructor(props) {
@@ -42,10 +43,10 @@ class Todomodify extends React.Component {
       handleClick,
     } = this;
     return (
-      <div>
-        <input value={subject} onChange={handleChangeSubject} />
-        <input value={detail} onChange={handleChangeDetail} />
-        <button type="button" onClick={handleClick}>완료</button>
+      <div className="modify">
+        <input className="modify__subject" value={subject} onChange={handleChangeSubject} />
+        <input className="modify__detail" value={detail} onChange={handleChangeDetail} />
+        <button className="modify__btn-submit" type="button" onClick={handleClick}>완료</button>
       </div>
     );
   }
