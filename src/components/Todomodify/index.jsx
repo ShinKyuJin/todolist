@@ -30,7 +30,7 @@ class Todomodify extends React.Component {
     const { itemId, subject, detail } = this.state;
     const { modifyTodo, history } = this.props;
     modifyTodo(parseInt(itemId, 10), subject, detail);
-    history.goBack(-1);
+    history.goBack();
   }
 
   render() {
