@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { modifyTodo } from '../../actions';
 
 class Todomodify extends React.Component {
   constructor(props) {
@@ -28,8 +29,8 @@ class Todomodify extends React.Component {
 
   handleClick = () => {
     const { itemId, subject, detail } = this.state;
-    const { modifyTodo, history } = this.props;
-    modifyTodo(parseInt(itemId, 10), subject, detail);
+    const { modify, history } = this.props;
+    modify(parseInt(itemId, 10), subject, detail);
     history.goBack();
   }
 
@@ -58,18 +59,11 @@ Todomodify.propTypes = {
     goBack: PropTypes.func,
   }).isRequired,
   todoList: PropTypes.objectOf.isRequired,
-  modifyTodo: PropTypes.func.isRequired,
+  modify: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  modifyTodo: (itemId, subject, detail) => {
-    dispatch({
-      type: 'MODIFY_TODO',
-      itemId,
-      subject,
-      detail,
-    });
-  },
+  modify: (itemId, subject, detail) => dispatch(modifyTodo(itemId, subject, detail)),
 });
 
 const mapStateToProps = (state) => ({
