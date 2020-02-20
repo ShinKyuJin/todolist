@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
-import Todotemplate from '../components/Todotemplate';
-import Todomodify from '../components/Todomodify';
+import Todotemplate from '../components/Todotemplate/Todotemplate';
+import Todomodify from '../components/Todomodify/Todomodify';
 
 const App = () => (
   <div>
