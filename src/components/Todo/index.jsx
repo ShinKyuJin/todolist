@@ -17,7 +17,7 @@ const Todo = ({
         MOD
     </Link>
     <button type="button" className="todo__btn-toggle" onClick={() => onToggle(itemId)}>
-        DONE
+        DON
     </button>
   </div>
 );

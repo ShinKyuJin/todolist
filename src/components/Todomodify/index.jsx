@@ -57,7 +57,7 @@ Todomodify.propTypes = {
   history: PropTypes.shape({
     goBack: PropTypes.func,
   }).isRequired,
-  todoList: PropTypes.func.isRequired,
+  todoList: PropTypes.objectOf.isRequired,
   modifyTodo: PropTypes.func.isRequired,
 };
 

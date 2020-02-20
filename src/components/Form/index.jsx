@@ -60,7 +60,7 @@ class Form extends React.Component {
           onKeyPress={handleKeyPress}
         />
         <button type="button" className="form__btn-add" onClick={handleClick}>
-          작성
+          작성e
         </button>
       </div>
     );

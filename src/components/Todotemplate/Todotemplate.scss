@@ -2,26 +2,25 @@
   #TEMPLATE-SECTION
 \*------------------------------------*/
 
-$body-color: #EEE;
-$bg-color: #22b8cf;
+@import "../colors";
 
 body {
-    background-color: $body-color;
+  background-color: $body-color;
 }
 
 
 .whole-wrapper {
-  margin:0 auto;
-  margin-top:4rem;
+  margin: 0 auto;
+  margin-top: 40px;
   width:512px;
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
   text-align: center;
   background-color: white;
 
   .app-name {
-    font-size:3em;
-    padding:30px;
-    background-color:$bg-color;
-    color:white;
+    font-size: 3em;
+    padding: 30px;
+    background-color: $main-color;
+    color: white;
   }
 }
