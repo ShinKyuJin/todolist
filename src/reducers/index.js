@@ -26,9 +26,9 @@ const todoApp = (state = initialState, action) => {
       };
     }
     case 'TOGGLE_TODO': {
-      state.todoList.forEach((obj) => {
-        if (obj.itemId === action.itemId) {
-          obj.checked = !obj.checked;
+      state.todoList.forEach((target) => {
+        if (target.itemId === action.itemId) {
+          target.checked = !target.checked;
         }
       });
       return {
@@ -49,10 +49,10 @@ const todoApp = (state = initialState, action) => {
         }
       }
     case 'MODIFY_TODO': {
-      state.todoList.forEach((obj) => {
-        if (obj.itemId === action.itemId) {
-          obj.subject = action.subject;
-          obj.detail = action.detail;
+      state.todoList.forEach((target) => {
+        if (target.itemId === action.itemId) {
+          target.subject = action.subject;
+          target.detail = action.detail;
         }
       });
       return {
