@@ -19,10 +19,12 @@ class Todomodify extends React.Component {
     super(props);
     const { match, todoList } = this.props;
     const { itemId } = match.params;
+    const findTodo = todoList.find((todo) => todo.itemId === parseInt(itemId, 10));
+    const { subject, detail } = findTodo;
     this.state = {
       itemId,
-      subject: todoList[itemId].subject,
-      detail: todoList[itemId].detail,
+      subject,
+      detail,
     };
   }
 
