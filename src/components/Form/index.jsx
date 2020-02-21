@@ -2,8 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import './Form.scss';
+import { addTodo } from '../../actions';
 
 class Form extends React.Component {
+  static propTypes = {
+    dispatch: PropTypes.func.isRequired,
+  };
+
   constructor(props) {
     super(props);
     this.state = {
@@ -26,8 +31,8 @@ class Form extends React.Component {
 
   handleClick = () => {
     const { subject, detail } = this.state;
-    const { addTodo } = this.props;
-    addTodo(subject, detail);
+    const { dispatch } = this.props;
+    dispatch(addTodo(subject, detail));
     this.setState({
       subject: '',
       detail: '',
@@ -67,18 +72,5 @@ class Form extends React.Component {
   }
 }
 
-Form.propTypes = {
-  addTodo: PropTypes.func.isRequired,
-};
 
-const mapDispatchToProps = (dispatch) => ({
-  addTodo: (subject, detail) => {
-    dispatch({
-      type: 'ADD_TODO',
-      subject,
-      detail,
-    });
-  },
-});
-
-export default connect(null, mapDispatchToProps)(Form);
+export default connect()(Form);
