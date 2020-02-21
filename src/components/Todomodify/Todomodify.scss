@@ -2,16 +2,43 @@
   #MODIFYTODO-SECTION
 \*------------------------------------*/
 
+@import '../colors/';
+
 .modify {
     text-align: center;
 
     &__subject, &__detail {
-    }
-
-    &__detail {
-    }
-
-    &__btn-submit {
-
-    }
+        margin: 0 auto;
+        display: block;
+        border: none;
+        border-bottom: 1px solid $main-color;
+        width: 50%;
+        height: 30px;
+        margin-top: 5px;
+        font-size: 18px;
+        text-align: center;
+    
+        &:focus { outline: none; }
+      }
+    
+      &__subject { margin-top: 30px; }
+    
+      &__detail {
+        margin-top: 15px;
+        margin-bottom: 20px;
+      }
+    
+      &__btn-submit {
+        width: 50%;
+        border: none;
+        height: 50px;
+        font-size: 18px;
+        background-color: $main-color;
+        color: white;
+        
+        &:hover {
+          background-color: darken($main-color,5);
+          cursor: pointer;
+          }
+      }
 }
