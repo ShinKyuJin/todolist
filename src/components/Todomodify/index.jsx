@@ -4,6 +4,17 @@ import PropTypes from 'prop-types';
 import { modifyTodo } from '../../actions';
 
 class Todomodify extends React.Component {
+  static propTypes = {
+    match: PropTypes.shape({
+      params: PropTypes.object,
+    }).isRequired,
+    history: PropTypes.shape({
+      goBack: PropTypes.func,
+    }).isRequired,
+    todoList: PropTypes.objectOf.isRequired,
+    modify: PropTypes.func.isRequired,
+  };
+
   constructor(props) {
     super(props);
     const { match, todoList } = this.props;
@@ -50,17 +61,6 @@ class Todomodify extends React.Component {
     );
   }
 }
-
-Todomodify.propTypes = {
-  match: PropTypes.shape({
-    params: PropTypes.object,
-  }).isRequired,
-  history: PropTypes.shape({
-    goBack: PropTypes.func,
-  }).isRequired,
-  todoList: PropTypes.objectOf.isRequired,
-  modify: PropTypes.func.isRequired,
-};
 
 const mapDispatchToProps = (dispatch) => ({
   modify: (itemId, subject, detail) => dispatch(modifyTodo(itemId, subject, detail)),

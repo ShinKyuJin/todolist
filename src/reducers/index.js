@@ -27,7 +27,6 @@ const todoApp = (state = initialState, action) => {
           subject: action.subject,
           detail: action.detail,
           checked: false,
-          isdel: false,
         }),
       };
     }

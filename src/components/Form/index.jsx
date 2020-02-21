@@ -5,6 +5,10 @@ import './Form.scss';
 import { addTodo } from '../../actions';
 
 class Form extends React.Component {
+  static propTypes = {
+    add: PropTypes.func.isRequired,
+  };
+
   constructor(props) {
     super(props);
     this.state = {
@@ -67,10 +71,6 @@ class Form extends React.Component {
     );
   }
 }
-
-Form.propTypes = {
-  add: PropTypes.func.isRequired,
-};
 
 const mapDispatchToProps = (dispatch) => ({
   add: (subject, detail) => dispatch(addTodo(subject, detail)),

@@ -6,18 +6,15 @@ import Todo from '../Todo';
 
 
 class Todolist extends React.Component {
-  handleToggle = (itemId) => {
-    const { toggle } = this.props;
-    toggle(itemId);
-  };
-
-  handleRemove = (itemId) => {
-    const { remove } = this.props;
-    remove(itemId);
+  static propTypes = {
+    todoList: PropTypes.objectOf.isRequired,
+    handleToggle: PropTypes.func.isRequired,
+    handleRemove: PropTypes.func.isRequired,
   };
 
   render() {
     const { todoList } = this.props;
+    const { handleToggle, handleRemove } = this.props;
     const mappingList = todoList.map(({
       itemId, subject, detail, checked,
     }) => (
@@ -27,8 +24,8 @@ class Todolist extends React.Component {
         subject={subject}
         detail={detail}
         checked={checked}
-        onToggle={this.handleToggle}
-        onRemove={this.handleRemove}
+        onToggle={handleToggle}
+        onRemove={handleRemove}
       />
     ));
 
@@ -36,19 +33,13 @@ class Todolist extends React.Component {
   }
 }
 
-Todolist.propTypes = {
-  todoList: PropTypes.objectOf.isRequired,
-  toggle: PropTypes.func.isRequired,
-  remove: PropTypes.func.isRequired,
-};
-
 const mapStateToProps = (state) => ({
   todoList: state.todoApp.todoList,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  toggle: (itemId) => dispatch(toggleTodo(itemId)),
-  remove: (itemId) => dispatch(removeTodo(itemId)),
+  handleToggle: (itemId) => dispatch(toggleTodo(itemId)),
+  handleRemove: (itemId) => dispatch(removeTodo(itemId)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Todolist);

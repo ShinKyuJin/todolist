@@ -3,7 +3,9 @@
     "extends": "airbnb",
     "plugins": ["react", "jsx-a11y", "import"],
     "rules": {
-        "linebreak-style": ["error", "windows"]
+        "linebreak-style": ["error", "windows"],
+        "react/prefer-stateless-function": "off",
+        "react/static-property-placement": 0
     },
     "env": {
         "browser": true
