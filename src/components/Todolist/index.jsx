@@ -46,8 +46,4 @@ const mapStateToProps = (state) => ({
   todoList: state.todoApp.todoList,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  dispatch,
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Todolist);
+export default connect(mapStateToProps)(Todolist);

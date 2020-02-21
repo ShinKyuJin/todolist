@@ -72,8 +72,5 @@ class Form extends React.Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  dispatch,
-});
 
-export default connect(null, mapDispatchToProps)(Form);
+export default connect()(Form);

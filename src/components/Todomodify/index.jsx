@@ -62,12 +62,8 @@ class Todomodify extends React.Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  dispatch,
-});
-
 const mapStateToProps = (state) => ({
   todoList: state.todoApp.todoList,
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Todomodify);
+export default connect(mapStateToProps)(Todomodify);
