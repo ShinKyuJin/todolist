@@ -6,7 +6,7 @@ import { addTodo } from '../../actions';
 
 class Form extends React.Component {
   static propTypes = {
-    add: PropTypes.func.isRequired,
+    dispatch: PropTypes.func.isRequired,
   };
 
   constructor(props) {
@@ -31,8 +31,10 @@ class Form extends React.Component {
 
   handleClick = () => {
     const { subject, detail } = this.state;
-    const { add } = this.props;
-    add(subject, detail);
+    const { dispatch } = this.props;
+
+    dispatch(addTodo(subject, detail));
+
     this.setState({
       subject: '',
       detail: '',
@@ -73,7 +75,7 @@ class Form extends React.Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  add: (subject, detail) => dispatch(addTodo(subject, detail)),
+  dispatch,
 });
 
 export default connect(null, mapDispatchToProps)(Form);

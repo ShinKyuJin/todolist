@@ -12,7 +12,7 @@ class Todomodify extends React.Component {
       goBack: PropTypes.func,
     }).isRequired,
     todoList: PropTypes.objectOf.isRequired,
-    modify: PropTypes.func.isRequired,
+    dispatch: PropTypes.func.isRequired,
   };
 
   constructor(props) {
@@ -40,8 +40,8 @@ class Todomodify extends React.Component {
 
   handleClick = () => {
     const { itemId, subject, detail } = this.state;
-    const { modify, history } = this.props;
-    modify(parseInt(itemId, 10), subject, detail);
+    const { dispatch, history } = this.props;
+    dispatch(modifyTodo(parseInt(itemId, 10), subject, detail));
     history.goBack();
   }
 
@@ -63,7 +63,7 @@ class Todomodify extends React.Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  modify: (itemId, subject, detail) => dispatch(modifyTodo(itemId, subject, detail)),
+  dispatch,
 });
 
 const mapStateToProps = (state) => ({
