@@ -3,10 +3,16 @@ import { combineReducers } from 'redux';
 const initialState = {
   todoList: [
     {
-      itemId: 0, subject: '12', detail: '123', checked: false, isdel: false,
+      itemId: 0,
+      subject: '12',
+      detail: '123',
+      checked: false,
     },
     {
-      itemId: 1, subject: '123', detail: '123', checked: true, isdel: false,
+      itemId: 1,
+      subject: '123',
+      detail: '123',
+      checked: true,
     },
   ],
 };
@@ -37,17 +43,11 @@ const todoApp = (state = initialState, action) => {
       };
     }
     case 'REMOVE_TODO': {
-      state.todoList.forEach((obj) => {
-          if(obj.itemId === action.itemId) {
-              obj.isdel = !obj.isdel;
-              console.log(obj);
-          }
-      });
-        return {
-            ...state,
-            todoList: [...state.todoList],
-        }
-      }
+      return {
+        ...state,
+        todoList: state.todoList.filter((target) => target.itemId !== action.itemId),
+      };
+    }
     case 'MODIFY_TODO': {
       state.todoList.forEach((target) => {
         if (target.itemId === action.itemId) {
