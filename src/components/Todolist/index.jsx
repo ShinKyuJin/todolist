@@ -2,20 +2,28 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Todo from '../Todo';
+import { toggleTodo, removeTodo } from '../../actions';
+
 
 class Todolist extends React.Component {
-  handleToggle = (itemId) => {
-    const { toggleTodo } = this.props;
-    toggleTodo(itemId);
+  static propTypes = {
+    todoList: PropTypes.objectOf.isRequired,
+    dispatch: PropTypes.func.isRequired,
   };
 
+  handleToggle = (itemId) => {
+    const { dispatch } = this.props;
+    dispatch(toggleTodo(itemId));
+  }
+
   handleRemove = (itemId) => {
-    const { removeTodo } = this.props;
-    removeTodo(itemId);
-  };
+    const { dispatch } = this.props;
+    dispatch(removeTodo(itemId));
+  }
 
   render() {
     const { todoList } = this.props;
+    const { handleToggle, handleRemove } = this;
     const mappingList = todoList.map(({
       itemId, subject, detail, checked,
     }) => (
@@ -25,8 +33,8 @@ class Todolist extends React.Component {
         subject={subject}
         detail={detail}
         checked={checked}
-        onToggle={this.handleToggle}
-        onRemove={this.handleRemove}
+        onToggle={handleToggle}
+        onRemove={handleRemove}
       />
     ));
 
@@ -34,19 +42,8 @@ class Todolist extends React.Component {
   }
 }
 
-Todolist.propTypes = {
-  toggleTodo: PropTypes.func.isRequired,
-  removeTodo: PropTypes.func.isRequired,
-  todoList: PropTypes.objectOf.isRequired,
-};
-
 const mapStateToProps = (state) => ({
   todoList: state.todoApp.todoList,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  toggleTodo: (itemId) => { dispatch({ type: 'TOGGLE_TODO', itemId }); },
-  removeTodo: (itemId) => { dispatch({ type: 'REMOVE_TODO', itemId }); },
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Todolist);
+export default connect(mapStateToProps)(Todolist);

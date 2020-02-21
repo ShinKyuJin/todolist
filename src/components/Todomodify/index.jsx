@@ -1,8 +1,20 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { modifyTodo } from '../../actions';
 
 class Todomodify extends React.Component {
+  static propTypes = {
+    match: PropTypes.shape({
+      params: PropTypes.object,
+    }).isRequired,
+    history: PropTypes.shape({
+      goBack: PropTypes.func,
+    }).isRequired,
+    todoList: PropTypes.objectOf.isRequired,
+    dispatch: PropTypes.func.isRequired,
+  };
+
   constructor(props) {
     super(props);
     const { match, todoList } = this.props;
@@ -28,8 +40,8 @@ class Todomodify extends React.Component {
 
   handleClick = () => {
     const { itemId, subject, detail } = this.state;
-    const { modifyTodo, history } = this.props;
-    modifyTodo(parseInt(itemId, 10), subject, detail);
+    const { dispatch, history } = this.props;
+    dispatch(modifyTodo(parseInt(itemId, 10), subject, detail));
     history.goBack();
   }
 
@@ -50,30 +62,8 @@ class Todomodify extends React.Component {
   }
 }
 
-Todomodify.propTypes = {
-  match: PropTypes.shape({
-    params: PropTypes.object,
-  }).isRequired,
-  history: PropTypes.shape({
-    goBack: PropTypes.func,
-  }).isRequired,
-  todoList: PropTypes.objectOf.isRequired,
-  modifyTodo: PropTypes.func.isRequired,
-};
-
-const mapDispatchToProps = (dispatch) => ({
-  modifyTodo: (itemId, subject, detail) => {
-    dispatch({
-      type: 'MODIFY_TODO',
-      itemId,
-      subject,
-      detail,
-    });
-  },
-});
-
 const mapStateToProps = (state) => ({
   todoList: state.todoApp.todoList,
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Todomodify);
+export default connect(mapStateToProps)(Todomodify);
