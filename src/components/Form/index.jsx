@@ -32,9 +32,7 @@ class Form extends React.Component {
   handleClick = () => {
     const { subject, detail } = this.state;
     const { dispatch } = this.props;
-
     dispatch(addTodo(subject, detail));
-
     this.setState({
       subject: '',
       detail: '',
