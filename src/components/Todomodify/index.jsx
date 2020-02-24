@@ -32,33 +32,31 @@ class Todomodify extends React.Component {
     this.setState({
       subject: e.target.value,
     });
-  }
+  };
 
   handleChangeDetail = (e) => {
     this.setState({
       detail: e.target.value,
     });
-  }
+  };
 
   handleClick = () => {
     const { itemId, subject, detail } = this.state;
     const { dispatch, history } = this.props;
     dispatch(modifyTodo(parseInt(itemId, 10), subject, detail));
     history.goBack();
-  }
+  };
 
   render() {
     const { subject, detail } = this.state;
-    const {
-      handleChangeSubject,
-      handleChangeDetail,
-      handleClick,
-    } = this;
+    const { handleChangeSubject, handleChangeDetail, handleClick } = this;
     return (
       <div>
         <input value={subject} onChange={handleChangeSubject} />
         <input value={detail} onChange={handleChangeDetail} />
-        <button type="button" onClick={handleClick}>완료</button>
+        <button type="button" onClick={handleClick}>
+          완료
+        </button>
       </div>
     );
   }

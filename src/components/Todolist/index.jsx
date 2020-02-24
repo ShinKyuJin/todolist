@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import Todo from '../Todo';
 import { toggleTodo, removeTodo } from '../../actions';
 
-
 class Todolist extends React.Component {
   static propTypes = {
     todoList: PropTypes.objectOf.isRequired,

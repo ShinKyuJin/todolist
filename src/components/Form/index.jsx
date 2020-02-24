@@ -72,5 +72,4 @@ class Form extends React.Component {
   }
 }
 
-
 export default connect()(Form);
