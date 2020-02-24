@@ -5,14 +5,27 @@ import { modifyTodo } from '../../actions';
 import './Todomodify.scss';
 
 class Todomodify extends React.Component {
+  static propTypes = {
+    match: PropTypes.shape({
+      params: PropTypes.object,
+    }).isRequired,
+    history: PropTypes.shape({
+      goBack: PropTypes.func,
+    }).isRequired,
+    todoList: PropTypes.objectOf.isRequired,
+    dispatch: PropTypes.func.isRequired,
+  };
+
   constructor(props) {
     super(props);
     const { match, todoList } = this.props;
     const { itemId } = match.params;
+    const findTodo = todoList.find((todo) => todo.itemId === parseInt(itemId, 10));
+    const { subject, detail } = findTodo;
     this.state = {
       itemId,
-      subject: todoList[itemId].subject,
-      detail: todoList[itemId].detail,
+      subject,
+      detail,
     };
   }
 
@@ -20,28 +33,24 @@ class Todomodify extends React.Component {
     this.setState({
       subject: e.target.value,
     });
-  }
+  };
 
   handleChangeDetail = (e) => {
     this.setState({
       detail: e.target.value,
     });
-  }
+  };
 
   handleClick = () => {
     const { itemId, subject, detail } = this.state;
-    const { modify, history } = this.props;
-    modify(parseInt(itemId, 10), subject, detail);
+    const { dispatch, history } = this.props;
+    dispatch(modifyTodo(parseInt(itemId, 10), subject, detail));
     history.goBack();
-  }
+  };
 
   render() {
     const { subject, detail } = this.state;
-    const {
-      handleChangeSubject,
-      handleChangeDetail,
-      handleClick,
-    } = this;
+    const { handleChangeSubject, handleChangeDetail, handleClick } = this;
     return (
       <div className="modify">
         <input className="modify__subject" value={subject} onChange={handleChangeSubject} />
@@ -52,23 +61,8 @@ class Todomodify extends React.Component {
   }
 }
 
-Todomodify.propTypes = {
-  match: PropTypes.shape({
-    params: PropTypes.object,
-  }).isRequired,
-  history: PropTypes.shape({
-    goBack: PropTypes.func,
-  }).isRequired,
-  todoList: PropTypes.objectOf.isRequired,
-  modify: PropTypes.func.isRequired,
-};
-
-const mapDispatchToProps = (dispatch) => ({
-  modify: (itemId, subject, detail) => dispatch(modifyTodo(itemId, subject, detail)),
-});
-
 const mapStateToProps = (state) => ({
   todoList: state.todoApp.todoList,
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Todomodify);
+export default connect(mapStateToProps)(Todomodify);

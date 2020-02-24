@@ -27,7 +27,6 @@ const todoApp = (state = initialState, action) => {
           subject: action.subject,
           detail: action.detail,
           checked: false,
-          isdel: false,
         }),
       };
     }
@@ -45,7 +44,7 @@ const todoApp = (state = initialState, action) => {
     case 'REMOVE_TODO': {
       return {
         ...state,
-        todoList: state.todoList.filter((val) => val.itemId !== action.itemId),
+        todoList: state.todoList.filter((target) => target.itemId !== action.itemId),
       };
     }
     case 'MODIFY_TODO': {
