@@ -1,0 +1,73 @@
+/*------------------------------------*\
+  #TODO-SECTION
+\*------------------------------------*/
+
+@import '../colors/index.scss';
+
+%btn {
+  float: right;
+  border: 1px solid black;
+  background-color: white; 
+  height: 30px;
+  margin-left: 10px;
+  cursor: pointer;
+  line-height: 28px;
+
+  &:hover { color: white; }
+}
+
+.todo {
+  text-align: left;
+  padding: 20px;
+
+  &__subject {
+    font-size: 2rem;
+  }
+
+  &__detail {
+    font-size: 1rem;
+    margin-left: 15px;
+    color: $detail-color;
+    display: inline-block;
+  }
+
+  &__btn-modify, &__btn-toggle, &__btn-remove { @extend %btn; }
+
+  &__btn-toggle {
+    border: 2px solid $toggle-color;
+    
+    &:hover { background-color: $toggle-color; } 
+  }
+
+  &__btn-modify {
+    border: 2px solid $modify-color;
+
+    &:hover {
+      background-color: $modify-color;
+
+      .link {
+        color: white;
+      } 
+    }
+
+    .link {
+      text-decoration: none;
+      color: black;
+    }
+  }
+   
+  &__btn-remove {
+    border: 2px solid $remove-color;
+
+    &:hover { background-color: $remove-color; }  
+  }
+   
+  &__checked {
+    color: $checked-color;
+    text-decoration: line-through;
+  }
+  
+  & + & {
+    border-top:1px solid #DDD;
+  }
+}
