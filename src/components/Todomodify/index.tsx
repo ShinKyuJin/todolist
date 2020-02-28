@@ -1,9 +1,18 @@
 import React, { useState } from 'react';
-import useTodos from '../../hooks/useTodos';
+import useModifyTodo from '../../hooks/useModifyTodo';
+import { RouteComponentProps } from 'react-router-dom';
+import useTodo from '../../hooks/useTodo';
 
-const Todomodify = () => {
+interface PathParams extends RouteComponentProps<any> {}
+
+const Todomodify: React.FC<PathParams> = ({ history, match }) => {
+  const [todo] = useTodo(parseInt(match.params.id, 10));
+  console.log(todo.subject);
+
   const [subject, setSubject] = useState('');
   const [detail, setDetail] = useState('');
+
+  const modifyTodo = useModifyTodo(parseInt(match.params.id, 10));
 
   const onChangeSubject = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setSubject(e.target.value);
@@ -13,18 +22,20 @@ const Todomodify = () => {
     setDetail(e.target.value);
   }
 
-  const onClick = (e: React.MouseEvent): void => {
-    e.preventDefault();
+  
 
+  const onClick = (): void => {
+    modifyTodo(subject, detail);
+    history.goBack();
   }
 
   return (
     <div>
-      <input 
+      <input
         onChange={onChangeSubject}
         value={subject}
       />
-      <input 
+      <input
         onChange={onChangeDetail}
         value={detail}
       />

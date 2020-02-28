@@ -1,6 +1,7 @@
 const ADD_TODO     = 'ADD_TODO' as const;
 const TOGGLE_TODO  = 'TOGGLE_TODO' as const;
 const REMOVE_TODO  = 'REMOVE_TODO' as const;
+const MODIFY_TODO  = 'MODIFY_TODO' as const;
 
 export const addTodo = (subject: string, detail:string) => ({
   type: ADD_TODO,
@@ -18,17 +19,25 @@ export const removeTodo = (id: number) => ({
   id,
 });
 
+export const modifyTodo = (id: number, subject: string, detail: string) => ({
+  type: MODIFY_TODO,
+  id,
+  subject,
+  detail,
+});
+
 type todosAction = 
   | ReturnType<typeof addTodo>
   | ReturnType<typeof toggleTodo>
-  | ReturnType<typeof removeTodo>;
+  | ReturnType<typeof removeTodo>
+  | ReturnType<typeof modifyTodo>;
 
 
 export type todo = {
-  id:      number;
-  subject: string;
-  detail:  string;
-  checked: boolean;
+  id      : number;
+  subject : string;
+  detail  : string;
+  checked : boolean;
 }
 
 type todosState = todo[];
@@ -47,15 +56,27 @@ const todos = (state: todosState = initialState, action: todosAction): todosStat
       });
     }
     case TOGGLE_TODO: {
-      return state.map(todo =>
+      return state.map((todo) =>
         todo.id === action.id ? { ...todo, checked: !todo.checked } : todo
       );
     }
-    case REMOVE_TODO:
-      console.log(state);
-      return state.filter(todo => todo.id !== action.id);
-    default:
+    case REMOVE_TODO: {
+      return state.filter((todo) => todo.id !== action.id);
+    }
+    case MODIFY_TODO: {
+      state.forEach((target) => {
+        if (target.id === action.id) {
+          target.subject = action.subject;
+          target.detail = action.detail;
+          console.log(target);
+        }
+      });
+      console.log(action);
       return state;
+    }
+    default: {
+      return state;
+    }
   }
 }
 
