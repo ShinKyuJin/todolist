@@ -16,7 +16,7 @@ const Todo = ({ todo }: todoProps) => {
       <div className={`todo__detail ${todo.checked ? 'todo__checked' : ''}`}>{todo.detail}</div>
       <div className='todo__btn-remove' onClick={onRemove}>삭제</div>
       <div className='todo__btn-modify'>
-        <Link className="link" to={`${123}`}>수정</Link>
+        <Link className="link" to={`${todo.id}`}>수정</Link>
       </div>
       <div className='todo__btn-toggle' onClick={onToggle}>완료</div>
     </div>
