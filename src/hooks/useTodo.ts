@@ -1,7 +1,8 @@
-import useTodos from "./useTodos";
+import { useSelector } from "react-redux";
+import { rootState } from "../modules";
 
 const useTodo = (id: number) => {
-  const todos = useTodos();
+  const todos = useSelector((state: rootState) => state.todos);
   const todo = todos.map((target) => {
     if (target.id === id) {
       return target;

@@ -4,7 +4,7 @@ import useTodoActions from '../../hooks/useTodoActions';
 import { Link } from 'react-router-dom';
 import './Todo.scss';
 
-export type todoProps = {
+type todoProps = {
   todo: todo;
 };
 

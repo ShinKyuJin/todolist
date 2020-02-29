@@ -4,9 +4,8 @@ import { addTodo } from "../modules/todos";
 
 const useAddTodo = () => {
   const dispatch = useDispatch();
-  return useCallback((subject, detail) => dispatch(addTodo(subject, detail)), [
-    dispatch,
-  ]);
+  return useCallback((subject, detail) => 
+  dispatch(addTodo(subject, detail)), [dispatch]);
 }
 
 export default useAddTodo;

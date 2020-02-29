@@ -4,10 +4,8 @@ import { modifyTodo } from "../modules/todos";
 
 const useModifyTodo = (id: number) => {
   const dispatch = useDispatch();
-  return useCallback((subject: string, detail: string) => dispatch(modifyTodo(id, subject, detail)), [
-    dispatch,
-    id,
-  ]);
+  return useCallback((subject: string, detail: string) =>
+  dispatch(modifyTodo(id, subject, detail)), [dispatch, id]);
 }
 
 export default useModifyTodo;

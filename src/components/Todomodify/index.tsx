@@ -1,18 +1,21 @@
 import React, { useState } from 'react';
 import useModifyTodo from '../../hooks/useModifyTodo';
-import { RouteComponentProps } from 'react-router-dom';
 import useTodo from '../../hooks/useTodo';
+import { RouteComponentProps, RouteProps } from "react-router-dom";
 
-interface PathParams extends RouteComponentProps<any> {}
+interface RouteInfo extends RouteProps {
+}
 
-const Todomodify: React.FC<PathParams> = ({ history, match }) => {
+
+const Todomodify = (props: { history: RouteComponentProps, match: RouteComponentProps }) => {
+  const { history, match } = props;
+  console.log(history, match);
   const [todo] = useTodo(parseInt(match.params.id, 10));
-  console.log(todo.subject);
 
   const [subject, setSubject] = useState('');
   const [detail, setDetail] = useState('');
 
-  const modifyTodo = useModifyTodo(parseInt(match.params.id, 10));
+  const modifyTodo = useModifyTodo(match.params.id);
 
   const onChangeSubject = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setSubject(e.target.value);
@@ -21,8 +24,6 @@ const Todomodify: React.FC<PathParams> = ({ history, match }) => {
   const onChangeDetail = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setDetail(e.target.value);
   }
-
-  
 
   const onClick = (): void => {
     modifyTodo(subject, detail);
