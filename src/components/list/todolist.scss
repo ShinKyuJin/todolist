@@ -1,0 +1,14 @@
+.list {
+
+  &__head {
+    border-bottom: 1px solid black;
+
+    & > tr > th {
+      width: 200px;
+    }
+  }
+
+  &__body {
+
+  }
+}
