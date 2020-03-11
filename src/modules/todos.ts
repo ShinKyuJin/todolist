@@ -6,7 +6,7 @@ export const addTodo = (subject: string, until: string) => ({
   until
 });
 
-type todosAction = 
+type todosAction =
   | ReturnType<typeof addTodo>;
 
 export type todo = {

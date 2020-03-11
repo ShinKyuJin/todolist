@@ -1,11 +1,13 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
-import Todotemplate from '../components/template';
+import Calendar from '../components/calendar';
+
+import './App.scss';
 
 const App: React.FC = () => {
   return (
-    <div>
-      <Route exact path="/" component={Todotemplate} />
+    <div className="components">
+      <Route exact path="/" component={Calendar} />
     </div>
   )
 };

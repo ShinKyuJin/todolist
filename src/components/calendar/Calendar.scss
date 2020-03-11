@@ -1,0 +1,75 @@
+.calendar {
+  margin: 0 auto;
+  margin-top: 20px;
+  width: 90%;
+  height: 900px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.1), 0 3px 6px rgba(0,0,0,0.1);
+  background-color: white;
+
+  &__header {
+    position: relative;
+    text-align: center;
+
+    &__btn-right, &__btn-left, &__month, &__year {
+      margin-top: 10px;
+      padding: 0 5px;
+      display: inline-block;
+    }
+    
+    &__btn-right, &__btn-left {
+      font-size: 32px;
+
+      &:hover {
+        color: blue;
+        cursor: pointer;
+      }
+    }
+
+    &__btn-left {
+      position: absolute;
+      left: 10px;
+    }
+    &__btn-right {
+      position: absolute;
+      right: 10px;
+    }
+
+    &__month {
+      font-size: 28px;
+    }
+
+    &__year {
+      font-size: 28px;
+    }
+  }
+
+  &__body {
+
+    &__daylist {
+      margin-top: 10px;
+      text-align: center;
+      padding: 0px;
+      border-top: 2px solid #ffa229;
+      overflow-x: scroll;
+
+      &__day, &__today {
+        display: inline-block;
+        width: 7.49%;
+        font-size: 16px;
+        height: 800px;
+
+        & + & {
+          border-left: 1px solid #AAA;
+        }
+      }
+
+      &__day {
+        color: gray;
+      }
+
+      &__today {
+        font-weight: bold;
+      }
+    }
+  }
+}
