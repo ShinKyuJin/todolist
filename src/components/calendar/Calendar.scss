@@ -5,35 +5,18 @@
   height: 900px;
   box-shadow: 0 3px 6px rgba(0,0,0,0.1), 0 3px 6px rgba(0,0,0,0.1);
   background-color: white;
+  position: relative;
 
   &__header {
     position: relative;
     text-align: center;
 
-    &__btn-right, &__btn-left, &__month, &__year {
+    &__month, &__year {
       margin-top: 10px;
       padding: 0 5px;
       display: inline-block;
     }
     
-    &__btn-right, &__btn-left {
-      font-size: 32px;
-
-      &:hover {
-        color: blue;
-        cursor: pointer;
-      }
-    }
-
-    &__btn-left {
-      position: absolute;
-      left: 10px;
-    }
-    &__btn-right {
-      position: absolute;
-      right: 10px;
-    }
-
     &__month {
       font-size: 28px;
     }
@@ -44,32 +27,85 @@
   }
 
   &__body {
+    height: 100%;
 
     &__daylist {
+      position: relative;
       margin-top: 10px;
       text-align: center;
       padding: 0px;
       border-top: 2px solid #ffa229;
+      overflow-y: hidden;
       overflow-x: scroll;
+      white-space: nowrap;
+      scrollbar-width: none;
+      height: 93.4%;
 
-      &__day, &__today {
+      &::-webkit-scrollbar {
+        display: none;
+      }
+
+      &__month, &__day, &__weekend {
+        height: 100%;
         display: inline-block;
-        width: 7.49%;
-        font-size: 16px;
-        height: 800px;
+        width: 70px;
+        padding: 0 6px;
+      }
 
-        & + & {
-          border-left: 1px solid #AAA;
-        }
+      &__month {
+        font-weight: 600;
+        height: 100%;
+        background:
+          repeating-linear-gradient(
+            45deg,
+            transparent,
+            transparent 10px,
+          #ccc 10px,
+          #ccc 20px
+          ),
+          linear-gradient(
+            to bottom,
+          #eee,
+          #999
+          );
+      }
+
+      &__weekend {
+        color: black;
+        background-color: #EEE;
       }
 
       &__day {
-        color: gray;
+        padding: 0 6px;
+        height: 100%;
       }
+    }
+  }
 
-      &__today {
-        font-weight: bold;
-      }
+  &__btn-addtodo {
+    font-size: 32px;
+    color: white;
+    background-color: #1192A8;
+    position: absolute;
+    right: 15px;
+    bottom: 15px;
+    border-radius: 45px 45px;
+    width: 50px;
+    height: 50px;
+    border: none;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.2), 0 6px 12px rgba(0,0,0,0.2);
+    cursor: pointer;
+
+    &:focus {
+      outline: none;
+    }
+    
+    &:hover {
+      background-color: darken(#1192A8, 10);
+    }
+
+    &:active {
+      background-color: darken(#1192A8, 20);
     }
   }
 }
