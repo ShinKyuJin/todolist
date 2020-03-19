@@ -1,0 +1,18 @@
+.template__nav {
+  height: 40px;
+  background-color: white;
+
+  &__link {
+    display: inline-block;
+    text-decoration: none;
+    color: black;
+    height: 40px;
+    width: 120px;
+    text-align: center;
+    line-height: 36px;
+
+    &:hover {
+      background-color: #DDD;
+    }
+  }
+}
