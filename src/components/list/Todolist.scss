@@ -6,6 +6,7 @@
     text-align: center;
     table-layout: fixed;
     width: 80%;
+    position: relative;
 
     &__th {
       
@@ -26,6 +27,28 @@
         padding: 10px;
         width: 150px;
         color: #AAA;
+      }
+    }
+
+    &__caption {
+      position: absolute;
+      left: 1px;
+      margin-top: -30px;
+      color: white;
+      padding: 5px;
+      display: block;
+      border-radius: 5px 5px 0 0;
+
+      &__progress {
+        background-color: rgb(168, 117, 255);
+      }
+      
+      &__hold {
+        background-color: rgb(249, 217, 0);
+      }
+
+      &__done {
+        background-color: rgb(46, 205, 111);
       }
     }
   }

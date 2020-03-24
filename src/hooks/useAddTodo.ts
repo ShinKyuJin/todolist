@@ -7,7 +7,8 @@ const useAddTodo = () => {
   
   return useCallback(
     (subject: string, start: string, end: string) => 
-    dispatch(addTodo(subject, start, end)), [dispatch]);
+    dispatch(addTodo(subject, start, end)), [dispatch]
+    );
 }
 
 export default useAddTodo;

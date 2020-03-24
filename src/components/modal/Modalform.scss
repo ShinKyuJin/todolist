@@ -3,11 +3,12 @@
 
   &__form {
     position: fixed;
+    left: 10%;
   }
 
   &__make {
     position: absolute;
-    right: 0;
+    right: 10%;
 
     &__btn {
       border: none;

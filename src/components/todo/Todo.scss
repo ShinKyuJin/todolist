@@ -14,6 +14,7 @@
 
   &__detail {
     cursor: pointer;
+    padding: 20px;
 
     & > img {
       width: 30px;
@@ -25,14 +26,36 @@
 
   &__start {
     width: 100px;
+    padding: 20px;
+
+    &:hover &__cramp {
+      display: inline-block;
+    }
   }
 
   &__end {
-    padding: 20px;
     width: 100px;
+    padding: 20px;
+
+    &:hover &__cramp {
+      display: inline;
+    }
   }
 
   & + & {
     margin-top: 10px;
+  }
+
+  &__left, &__right {
+    font-size:24px;
+    display: none;
+  }
+
+  &__left {
+    padding-right: 20px;
+  }
+
+  &__right {
+    padding-left: 20px;
   }
 }
