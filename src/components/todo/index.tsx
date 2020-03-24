@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { todo, todoStatus } from '../../modules/todos';
+import { todo } from '../../modules/todos';
 import comment from '../../assets/comment.png';
 import './Todo.scss';
 import useModifyTodo from '../../hooks/useModifyTodo';
@@ -36,7 +36,7 @@ const Todo = ({ todo }: todoProps) => {
   }
 
   const handleChangeStatus = () => {
-    changeTodoStatus(todo.id, todo.status+1);
+    changeTodoStatus(todo.id, (todo.status + 1) % 3);
   }
   
   return (

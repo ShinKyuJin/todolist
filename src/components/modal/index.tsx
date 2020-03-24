@@ -32,14 +32,15 @@ const Modalform: React.FC = () => {
     setDue(dueTime.add(addDue, 'days').format('MMM DD'));
   };
 
-  const [click, setClick] = useState(false);
-  const handleClick = () => {
-    setClick(!click);
-  };
-
   const [subject, setSubject] = useState('');
   const handleChangeSubject = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSubject(e.target.value);
+  }
+
+  const [click, setClick] = useState(false);
+
+  const handleClick = () => {
+    setClick(!click);
   }
 
   const addTodo = useAddTodo();
@@ -54,31 +55,33 @@ const Modalform: React.FC = () => {
   };
 
   return (
-    <div className="modal">
-      <div className="modal__form">
-        {
-          click &&
-          <div className="modal__form__body">
-            <input type="text" onChange={handleChangeSubject} />
-            <p className="modal__form__body__curTime">{cur}</p>
-            <button type="button" onClick={handleCurAddDay}>+1</button>
-            <button type="button" onClick={handleCurSubDay}>-1</button>
-            <p className="modal__form__body__dueTime">{due}</p>
-            <button type="button" onClick={handleDueAddDay}>+1</button>
-            <button type="button" onClick={handleDueSubDay}>-1</button>
-            <br />
-            <button type="button" onClick={handleClickAdd}>추가</button>
-            <button type="button" onClick={handleClick}>취소</button>
-          </div>
-        }
+    <React.Fragment>
+      {
+        click &&
+        <div className="modal-overlay" />
+      }
+      <div className="modal">
+        <div className="modal__form">
+          {
+            click &&
+            <div className="modal__form__body">
+              <input type="text" onChange={handleChangeSubject} />
+              <p className="modal__form__body__curTime">{cur}</p>
+              <button type="button" onClick={handleCurAddDay}>+1</button>
+              <button type="button" onClick={handleCurSubDay}>-1</button>
+              <p className="modal__form__body__dueTime">{due}</p>
+              <button type="button" onClick={handleDueAddDay}>+1</button>
+              <button type="button" onClick={handleDueSubDay}>-1</button>
+              <br />
+              <button type="button" onClick={handleClickAdd}>추가</button>
+            </div>
+          }
+        </div>
       </div>
-      <div className="modal__make">
-        {
-          !click &&
-          <button type="button" onClick={handleClick} className="modal__make__btn">+</button>
-        }
-      </div>
-    </div>
+      {
+        !click && <button onClick={handleClick}>+</button>
+      }
+    </React.Fragment>
   );
 };
 
