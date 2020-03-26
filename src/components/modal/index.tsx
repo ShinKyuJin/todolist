@@ -3,6 +3,8 @@ import moment from 'moment';
 import './Modalform.scss';
 import useAddTodo from '../../hooks/useAddTodo';
 
+let addCur: number = 0;
+let addDue: number = 0;
 
 const Modalform: React.FC = () => {
   const current = moment().format('YYYY-MM-DD');
@@ -10,26 +12,20 @@ const Modalform: React.FC = () => {
   const curTime = moment(current);
   const dueTime = moment(current);
 
-  const [cur, setCur] = useState(curTime.format('MMM DD'));
-  const [due, setDue] = useState(dueTime.format('MMM DD'));
-  const [addCur, setAddCur] = useState(0);
-  const [addDue, setAddDue] = useState(0);
+  const [cur, setCur] = useState(curTime.format('MM-DD'));
+  const [due, setDue] = useState(dueTime.format('MM-DD'));
 
   const handleCurAddDay = () => {
-    setAddCur(addCur + 1);
-    setCur(curTime.add(addCur, 'days').format('MMM DD'));
+    setCur(curTime.add(++addCur, 'days').format('MM-DD'));
   };
   const handleCurSubDay = () => {
-    setAddCur(addCur - 1);
-    setCur(curTime.add(addCur, 'days').format('MMM DD'));
+    setCur(curTime.add(--addCur, 'days').format('MM-DD'));
   };
   const handleDueAddDay = () => {
-    setAddDue(addDue + 1);
-    setDue(dueTime.add(addDue, 'days').format('MMM DD'));
+    setDue(dueTime.add(++addDue, 'days').format('MM-DD'));
   };
   const handleDueSubDay = () => {
-    setAddDue(addDue - 1);
-    setDue(dueTime.add(addDue, 'days').format('MMM DD'));
+    setDue(dueTime.add(--addDue, 'days').format('MM-DD'));
   };
 
   const [subject, setSubject] = useState('');
@@ -50,8 +46,8 @@ const Modalform: React.FC = () => {
     setSubject('');
     setCur(curTime.format('MM-DD'));
     setDue(dueTime.format('MM-DD'));
-    setAddCur(0);
-    setAddDue(0);
+    addCur = 0;
+    addDue = 0;
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
@@ -70,21 +66,26 @@ const Modalform: React.FC = () => {
     <React.Fragment>
       {
         click &&
-        <div className="modal-overlay" onClickCapture={handleClickOutModal} />
+        <div className="modal-overlay" onClick={handleClickOutModal} />
       }
       {
         click &&
         <div className="modal">
           <div className="modal__form">
-              <input type="text" onChange={handleChangeSubject} placeholder="할 일을 적어주세요" onKeyPress={handleKeyPress} autoFocus />
+            <input type="text" onChange={handleChangeSubject} placeholder="할 일을 적어주세요" onKeyPress={handleKeyPress} autoFocus />
+            <div className="modal__form__wrapper">
+              <p className="modal__form__caption">Start Date</p>
               <p className="modal__form__curTime">{cur}</p>
               <button type="button" onClick={handleCurAddDay}>+1</button>
               <button type="button" onClick={handleCurSubDay}>-1</button>
+            </div>
+            <div className="modal__form__wrapper">
+              <p className="modal__form__caption">Due Date</p>
               <p className="modal__form__dueTime">{due}</p>
               <button type="button" onClick={handleDueAddDay}>+1</button>
               <button type="button" onClick={handleDueSubDay}>-1</button>
-              <br />
-              <button type="button" onClick={handleClickAdd} className="modal__form__add">추가</button>
+            </div>
+            <button type="button" onClick={handleClickAdd} className="modal__form__add">추가</button>
           </div>
         </div>
       }
