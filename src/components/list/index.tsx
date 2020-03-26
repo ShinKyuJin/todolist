@@ -9,21 +9,16 @@ const Todolist: React.FC = () => {
   const todos = useTodos();
 
   let key = 0;
-  const progressList = todos.map((todo) =>
-    todo.status === todoStatus.PROGRESS ?
-    <Todo todo={todo} key={key++} /> : null
-  );
 
-  const holdList = todos.map((todo) =>
-    todo.status === todoStatus.HOLD ?
-    <Todo todo={todo} key={key++} /> : null
-  );
-
-  const doneList = todos.map((todo) =>
-    todo.status === todoStatus.DONE ?
-    <Todo todo={todo} key={key++} /> : null
-  );
-
+  const progressList = todos.filter((todo) => todo.status === todoStatus.PROGRESS).map((todo) => (
+    <Todo todo={todo} key={key++} />
+  ));
+  const holdList = todos.filter((todo) => todo.status === todoStatus.HOLD).map((todo) => (
+    <Todo todo={todo} key={key++} />
+  ));
+  const doneList = todos.filter((todo) => todo.status === todoStatus.DONE).map((todo) => (
+    <Todo todo={todo} key={key++} />
+  ));
 
   return (
     <div className="list">
@@ -37,15 +32,20 @@ const Todolist: React.FC = () => {
           </tr>
         </thead>
         <tbody>
-          <span className="list__table__caption list__table__caption__progress">Progressing</span>
+          {
+            progressList.length > 0 ?
+            <tr className="list__table__caption list__table__caption__progress"></tr> : null
+          }
           {progressList}
-          <br />
-          <br />
-          <span className="list__table__caption list__table__caption__hold">On Hold</span>
+          {
+            holdList.length > 0 ?
+            <tr className="list__table__caption list__table__caption__hold"></tr> : null
+          }
           {holdList}
-          <br />
-          <br />
-          <span className="list__table__caption list__table__caption__done">Done</span>
+          {
+            doneList.length > 0 ?
+            <tr className="list__table__caption list__table__caption__done"></tr> : null
+          }
           {doneList}
         </tbody>
       </table>

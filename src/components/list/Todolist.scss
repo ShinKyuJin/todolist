@@ -31,23 +31,40 @@
     }
 
     &__caption {
-      position: absolute;
-      left: 1px;
-      margin-top: -30px;
-      color: white;
-      padding: 5px;
-      display: block;
-      border-radius: 5px 5px 0 0;
 
-      &__progress {
+      &__progress::before {
+        position: absolute;
+        padding: 5px;
+        margin-top: -29px;
+        border-radius: 5px 5px 0 0;
+        left: 0;
+        width: 150px;
+        color: white;
+        content: 'Progressing';
         background-color: rgb(168, 117, 255);
       }
       
-      &__hold {
+      &__hold::before {
+        position: absolute;
+        padding: 5px;
+        margin-top: -29px;
+        border-radius: 5px 5px 0 0;
+        left: 0;
+        width: 150px;
+        color: white;
+        content: 'on Holding';
         background-color: rgb(249, 217, 0);
       }
 
-      &__done {
+      &__done::before {
+        position: absolute;
+        padding: 5px;
+        margin-top: -29px;
+        border-radius: 5px 5px 0 0;
+        left: 0;
+        width: 150px;
+        color: white;
+        content: 'Done';
         background-color: rgb(46, 205, 111);
       }
     }

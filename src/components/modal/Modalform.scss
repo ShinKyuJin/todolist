@@ -9,34 +9,68 @@
 
 .modal {
   position: fixed;
+  width: 70%;
+  height: 50%;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 320px;
+  
   background-color: white;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+  
+  &__form {
+    text-align: center;
 
-  &__make {
-    position: absolute;
-    right: 10%;
-
-    &__btn {
+    & > input {
+      width: 70%;
+      margin-top: 30px;
+      height: 40px;
+      text-align: center;
       border: none;
-      width: 50px;
-      height: 50px;
-      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1), 0 6px 12px rgba(0, 0, 0, 0.1);
-      background-color: white;
-      font-size: 32px;
-      color: black;
-      border-radius: 40px;
+      border-bottom: 1px solid black;
+      font-size: 20px;
 
-      &:hover {
-        background-color: #888;
-        cursor: pointer;
-      }
       &:focus {
-        background-color: black;
+        outline: none;
       }
     }
+
+    &__add {
+      margin-top: 30px;
+      width: 100%;
+      height: 40px;
+      color:white;
+      border: none;
+      background-color: black;
+
+      &:hover {
+        background-color: #555;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+.btn-add {
+  position: fixed;
+  right: 30px;
+  bottom: 30px;
+  width: 50px;
+  height: 50px;
+  border-radius: 35px 35px;
+  border: none;
+  border: 1px solid black;
+  background-color: white;
+  font-size: 24px;
+
+  &:hover {
+    border: 1px solid white;
+    background-color: black;
+    color: white;
+    cursor: pointer;
+  }
+
+  &:focus {
+    outline: none;
   }
 }

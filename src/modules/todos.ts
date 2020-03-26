@@ -1,6 +1,7 @@
 const ADD_TODO = 'ADD_TODO' as const;
 const MODIFY_TODO_SUBJECT = 'MODIFY_TODO_SUBJECT' as const;
 const CHANGE_TODO_STATUS = 'CHANGE_TODO_STATUS' as const;
+const DEL_TODO = 'DEL_TODO' as const;
 
 export const addTodo = (subject: string, start: string, end: string) => ({
   type: ADD_TODO,
@@ -21,10 +22,16 @@ export const changeTodoStatus = (id: number, status: number) => ({
   status
 });
 
+export const delTodo = (id: number) => ({
+  type: DEL_TODO,
+  id
+});
+
 type todosAction =
   | ReturnType<typeof addTodo>
   | ReturnType<typeof modifyTodoSubject>
-  | ReturnType<typeof changeTodoStatus>;
+  | ReturnType<typeof changeTodoStatus>
+  | ReturnType<typeof delTodo>;
 
 export enum todoStatus {
   PROGRESS,
@@ -64,22 +71,25 @@ const todos = (state: todosState = initialState, action: todosAction) => {
       const newTodo = {...state[index]};
       newTodo.subject = action.subject;
 
-      return [
-        ...state.slice(0, action.id),
-        newTodo,
-        ...state.slice(action.id+1, state.length)
-      ];
+      const newState = [...state.filter((todo) => todo.id !== action.id)];
+      newState.push(newTodo);
+
+      return newState;
     }
       
     case CHANGE_TODO_STATUS: {
       const index = state.findIndex((todo) => todo.id === action.id);
       const newTodo = {...state[index]};
       newTodo.status = action.status;
+
+      const newState = [...state.filter((todo) => todo.id !== action.id)];
+      newState.push(newTodo);
       
+      return newState;
+    }
+    case DEL_TODO: {
       return [
-        ...state.slice(0, action.id),
-        newTodo,
-        ...state.slice(action.id+1, state.length)
+        ...state.filter((todo) => todo.id !== action.id)
       ];
     }
     default:

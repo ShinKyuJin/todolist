@@ -4,6 +4,7 @@ import comment from '../../assets/comment.png';
 import './Todo.scss';
 import useModifyTodo from '../../hooks/useModifyTodo';
 import useChangeTodoStatus from '../../hooks/useChangeTodoStatus';
+import useDelTodo from '../../hooks/useDelTodo';
 
 type todoProps = {
   todo: todo;
@@ -24,9 +25,22 @@ const Todo = ({ todo }: todoProps) => {
     setDbSubject(!dbSubject);
   }
 
+  const handleKeyPress = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      handleConfirmSubject();
+    }
+  }
+
   const dbClickSubjectInput = (
     <div>
-      <input type="text" className="list__table__td__subject-modify" onChange={handleChangeSubject} value={subject} />
+      <input 
+        type="text"
+        className="list__table__td__subject-modify" 
+        onChange={handleChangeSubject}
+        value={subject}
+        onKeyPress={handleKeyPress}
+        autoFocus
+      />
       <button type="button" onClick={handleConfirmSubject}>확인</button>
     </div>
   )
@@ -37,6 +51,12 @@ const Todo = ({ todo }: todoProps) => {
 
   const handleChangeStatus = () => {
     changeTodoStatus(todo.id, (todo.status + 1) % 3);
+  }
+
+  const delTodo = useDelTodo();
+
+  const handleDelTodo = () => {
+    delTodo(todo.id);
   }
   
   return (
@@ -57,6 +77,7 @@ const Todo = ({ todo }: todoProps) => {
       <td className="list__table__td__end">
         {todo.end}
         <button onClick={handleChangeStatus}>hello?</button>
+        <button onClick={handleDelTodo}>remove!</button>
       </td>
     </tr>
   );
