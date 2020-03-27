@@ -5,6 +5,7 @@ import './Todo.scss';
 import useModifyTodo from '../../hooks/useModifyTodo';
 import useChangeTodoStatus from '../../hooks/useChangeTodoStatus';
 import useDelTodo from '../../hooks/useDelTodo';
+import { Link } from 'react-router-dom';
 
 type todoProps = {
   todo: todo;
@@ -69,15 +70,17 @@ const Todo = ({ todo }: todoProps) => {
         }
       </td>
       <td className="list__table__td__detail">
-        <img src={comment} alt="comment" />
+        <Link to={todo.id.toString()}>
+          <img src={comment} alt="comment" />
+        </Link>
       </td>
       <td className="list__table__td__start">
         {todo.start}
       </td>
       <td className="list__table__td__end">
         {todo.end}
-        <button onClick={handleChangeStatus}>hello?</button>
-        <button onClick={handleDelTodo}>remove!</button>
+        <button onClick={handleChangeStatus} className="list__table__td__end__btn-change">C</button>
+        <button onClick={handleDelTodo} className="list__table__td__end__btn-remove">&times;</button>
       </td>
     </tr>
   );

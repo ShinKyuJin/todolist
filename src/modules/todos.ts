@@ -2,6 +2,7 @@ const ADD_TODO = 'ADD_TODO' as const;
 const MODIFY_TODO_SUBJECT = 'MODIFY_TODO_SUBJECT' as const;
 const CHANGE_TODO_STATUS = 'CHANGE_TODO_STATUS' as const;
 const DEL_TODO = 'DEL_TODO' as const;
+const ADD_TODO_DETAIL = 'ADD_TODO_DETAIL' as const;
 
 export const addTodo = (subject: string, start: string, end: string) => ({
   type: ADD_TODO,
@@ -27,11 +28,18 @@ export const delTodo = (id: number) => ({
   id
 });
 
+export const addTodoDetail = (id: number, detail: string) => ({
+  type: ADD_TODO_DETAIL,
+  id,
+  detail
+});
+
 type todosAction =
   | ReturnType<typeof addTodo>
   | ReturnType<typeof modifyTodoSubject>
   | ReturnType<typeof changeTodoStatus>
-  | ReturnType<typeof delTodo>;
+  | ReturnType<typeof delTodo>
+  | ReturnType<typeof addTodoDetail>;
 
 export enum todoStatus {
   PROGRESS,
@@ -42,7 +50,7 @@ export enum todoStatus {
 export type todo = {
   id: number;
   subject: string;
-  detail: Array<string>
+  detail: string[]
   start: string;
   end: string;
   status: todoStatus;
@@ -91,6 +99,15 @@ const todos = (state: todosState = initialState, action: todosAction) => {
       return [
         ...state.filter((todo) => todo.id !== action.id)
       ];
+    }
+    case ADD_TODO_DETAIL: {
+      const index = state.findIndex((todo) => todo.id === action.id);
+      const newTodo = {...state[index]};
+      newTodo.detail.push(action.detail);
+      const newState = [...state.filter((todo) => todo.id !== action.id)];
+      newState.push(newTodo);
+
+      return newState;
     }
     default:
       return state;
