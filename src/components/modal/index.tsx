@@ -41,7 +41,9 @@ const Modalform: React.FC = () => {
 
   const addTodo = useAddTodo();
   const handleClickAdd = () => {
-    addTodo(subject, cur, due);
+    const curTimeForStore = curTime.add(addCur, 'days').format('YYYY-MM-DD');
+    const dueTimeForStore = dueTime.add(addDue, 'days').format('YYYY-MM-DD');
+    addTodo(subject, curTimeForStore, dueTimeForStore);
     setClick(!click);
     setSubject('');
     setCur(curTime.format('MM-DD'));

@@ -6,6 +6,7 @@ import useModifyTodo from '../../hooks/useModifyTodo';
 import useChangeTodoStatus from '../../hooks/useChangeTodoStatus';
 import useDelTodo from '../../hooks/useDelTodo';
 import { Link } from 'react-router-dom';
+import moment from 'moment';
 
 type todoProps = {
   todo: todo;
@@ -31,6 +32,9 @@ const Todo = ({ todo }: todoProps) => {
       handleConfirmSubject();
     }
   }
+
+  const cur = moment(todo.start).format('MM-DD');
+  const due = moment(todo.end).format('MM-DD');
 
   const dbClickSubjectInput = (
     <div>
@@ -60,7 +64,6 @@ const Todo = ({ todo }: todoProps) => {
     delTodo(todo.id);
   }
 
-  
   return (
     <tr className="list__table__td">
       <td className="list__table__td__subject" onDoubleClick={handleModifySubject}>
@@ -77,10 +80,10 @@ const Todo = ({ todo }: todoProps) => {
         </Link>
       </td>
       <td className="list__table__td__start">
-        {todo.start}
+        {cur}
       </td>
       <td className="list__table__td__end">
-        {todo.end}
+        {due}
         <button onClick={handleChangeStatus} className="list__table__td__end__btn-change">C</button>
         <button onClick={handleDelTodo} className="list__table__td__end__btn-remove">&times;</button>
       </td>
