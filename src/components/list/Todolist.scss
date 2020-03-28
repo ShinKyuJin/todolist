@@ -1,3 +1,5 @@
+@import '../colors/index.scss';
+
 .list {
 
   &__table {
@@ -32,6 +34,10 @@
 
     &__caption {
 
+      & + & {
+        margin-top: 1000px;
+      }
+
       &__progress::before {
         position: absolute;
         padding: 5px;
@@ -41,7 +47,7 @@
         width: 150px;
         color: white;
         content: 'Progressing';
-        background-color: rgb(168, 117, 255);
+        background-color: $progress-caption-color;
       }
       
       &__hold::before {
@@ -53,7 +59,7 @@
         width: 150px;
         color: white;
         content: 'on Holding';
-        background-color: rgb(249, 217, 0);
+        background-color: $hold-caption-color;
       }
 
       &__done::before {
@@ -65,7 +71,7 @@
         width: 150px;
         color: white;
         content: 'Done';
-        background-color: rgb(46, 205, 111);
+        background-color: $done-caption-color;
       }
     }
   }

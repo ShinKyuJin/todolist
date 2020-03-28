@@ -59,6 +59,7 @@ const Todo = ({ todo }: todoProps) => {
   const handleDelTodo = () => {
     delTodo(todo.id);
   }
+
   
   return (
     <tr className="list__table__td">
@@ -70,6 +71,7 @@ const Todo = ({ todo }: todoProps) => {
         }
       </td>
       <td className="list__table__td__detail">
+        <p className="list__table__td__detail__arrow_box">123</p>
         <Link to={todo.id.toString()}>
           <img src={comment} alt="comment" />
         </Link>

@@ -1,4 +1,8 @@
+@import '../animation/index.scss';
+@import '../colors/index.scss';
+
 .modal-overlay {
+  animation: fadein 0.5s;
   position: fixed;
   top: 0;
   left: 0;
@@ -8,55 +12,60 @@
 }
 
 .modal {
+  animation: fadein 0.5s;
   position: fixed;
   width: 70%;
   height: 50%;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  padding: 70px;
+  padding: 0 70px 70px 70px;
   
   background-color: white;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
   
-  &__form {
-    text-align: center;
+  &__caption {
+    padding: 30px 30px 30px 0;
+    text-align: left;
+    font-size: 24px;
+  }
 
-    &__wrapper {
-      display: inline-block;
-      width: 300px;
-      height: 200px;
-      border: 1px solid red;
-      margin-top: 25px;
-    }
+  &__form {
 
     & > input {
-      display: block;
-      width: 70%;
-      margin: 0 auto;
-      margin-top: 30px;
-      height: 40px;
+      width: 100%;
+      height: 50px;
+      font-size: 16px;
       text-align: center;
       border: none;
-      border-bottom: 1px solid black;
-      font-size: 20px;
-
+      border-bottom: 2px solid #DDD;
+      
       &:focus {
         outline: none;
       }
     }
 
-    &__add {
-      margin-top: 30px;
-      width: 100%;
-      height: 40px;
-      color:white;
-      border: none;
-      background-color: black;
+    &__wrapper {
+      display: inline-block;
+      width: 50%;
+      text-align: center;
 
-      &:hover {
-        background-color: #555;
-        cursor: pointer;
+      &__caption {
+
+      }
+    }
+
+    &__add {
+      width: 100%;
+      height: 50px;
+      border: none;
+      background-color: $done-caption-color;
+      color: white;
+      font-size: 16px;
+      margin-top: 40px;
+
+      &:focus {
+        outline: none;
       }
     }
   }

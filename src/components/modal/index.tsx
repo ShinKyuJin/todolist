@@ -71,17 +71,18 @@ const Modalform: React.FC = () => {
       {
         click &&
         <div className="modal">
+          <div className="modal__caption">할 일 추가하기</div>
           <div className="modal__form">
-            <input type="text" onChange={handleChangeSubject} placeholder="할 일을 적어주세요" onKeyPress={handleKeyPress} autoFocus />
+            <input type="text" onChange={handleChangeSubject} placeholder="제목" onKeyPress={handleKeyPress} autoFocus />
             <div className="modal__form__wrapper">
-              <p className="modal__form__caption">Start Date</p>
-              <p className="modal__form__curTime">{cur}</p>
+              <p className="modal__form__wrapper__caption">시작 날짜</p>
+              <p className="modal__form__wrapper__curTime">{cur}</p>
               <button type="button" onClick={handleCurAddDay}>+1</button>
               <button type="button" onClick={handleCurSubDay}>-1</button>
             </div>
             <div className="modal__form__wrapper">
-              <p className="modal__form__caption">Due Date</p>
-              <p className="modal__form__dueTime">{due}</p>
+              <p className="modal__form__wrapper__caption">마감 날짜</p>
+              <p className="modal__form__wrapper__dueTime">{due}</p>
               <button type="button" onClick={handleDueAddDay}>+1</button>
               <button type="button" onClick={handleDueSubDay}>-1</button>
             </div>
