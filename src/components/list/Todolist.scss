@@ -46,7 +46,7 @@
         left: 1px;
         width: 150px;
         color: white;
-        content: 'Progressing';
+        content: '진행 중';
         background-color: $progress-caption-color;
       }
       
@@ -58,7 +58,7 @@
         left: 1px;
         width: 150px;
         color: white;
-        content: 'on Holding';
+        content: '보류';
         background-color: $hold-caption-color;
       }
 
@@ -70,7 +70,7 @@
         left: 1px;
         width: 150px;
         color: white;
-        content: 'Done';
+        content: '완료';
         background-color: $done-caption-color;
       }
     }

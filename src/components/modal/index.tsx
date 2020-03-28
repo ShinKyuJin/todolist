@@ -77,14 +77,14 @@ const Modalform: React.FC = () => {
             <div className="modal__form__wrapper">
               <p className="modal__form__wrapper__caption">시작 날짜</p>
               <p className="modal__form__wrapper__curTime">{cur}</p>
-              <button type="button" onClick={handleCurAddDay}>+1</button>
-              <button type="button" onClick={handleCurSubDay}>-1</button>
+              <button type="button" onClick={handleCurAddDay}>+</button>
+              <button type="button" onClick={handleCurSubDay}>-</button>
             </div>
             <div className="modal__form__wrapper">
               <p className="modal__form__wrapper__caption">마감 날짜</p>
               <p className="modal__form__wrapper__dueTime">{due}</p>
-              <button type="button" onClick={handleDueAddDay}>+1</button>
-              <button type="button" onClick={handleDueSubDay}>-1</button>
+              <button type="button" onClick={handleDueAddDay}>+</button>
+              <button type="button" onClick={handleDueSubDay}>-</button>
             </div>
             <button type="button" onClick={handleClickAdd} className="modal__form__add">추가</button>
           </div>
