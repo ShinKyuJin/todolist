@@ -1,3 +1,5 @@
+import moment from "moment";
+
 const ADD_TODO = 'ADD_TODO' as const;
 const MODIFY_TODO_SUBJECT = 'MODIFY_TODO_SUBJECT' as const;
 const CHANGE_TODO_STATUS = 'CHANGE_TODO_STATUS' as const;
@@ -62,38 +64,39 @@ const initialState: todosState = [];
 
 let nextId = 0;
 
+const sortTodoByDueTime = (state: todosState) => {
+  const newState = [...state].sort(
+    (a: todo, b: todo) => (
+      moment(a.end).diff(b.end)
+    )
+  );
+
+  return newState;
+}
+
 const todos = (state: todosState = initialState, action: todosAction) => {
   switch(action.type) {
     case ADD_TODO: {
-      return state.concat({
+      return sortTodoByDueTime(state.concat({
         id: nextId++,
         subject: action.subject,
         detail: [],
         start: action.start,
         end: action.end,
         status: todoStatus.PROGRESS
-      });
+      }));
     }
     case MODIFY_TODO_SUBJECT: {
       const index = state.findIndex((todo) => todo.id === action.id);
-      const newTodo = {...state[index]};
-      newTodo.subject = action.subject;
+      const newTodo = {...state[index], subject: action.subject};
 
-      const newState = [...state.filter((todo) => todo.id !== action.id)];
-      newState.push(newTodo);
-
-      return newState;
+      return sortTodoByDueTime([...state.filter((todo) => todo.id !== action.id)].concat(newTodo));
     }
-      
     case CHANGE_TODO_STATUS: {
       const index = state.findIndex((todo) => todo.id === action.id);
-      const newTodo = {...state[index]};
-      newTodo.status = action.status;
+      const newTodo = {...state[index], status: action.status};
 
-      const newState = [...state.filter((todo) => todo.id !== action.id)];
-      newState.push(newTodo);
-      
-      return newState;
+      return sortTodoByDueTime([...state.filter((todo) => todo.id !== action.id)].concat(newTodo));
     }
     case DEL_TODO: {
       return [
@@ -102,12 +105,9 @@ const todos = (state: todosState = initialState, action: todosAction) => {
     }
     case ADD_TODO_DETAIL: {
       const index = state.findIndex((todo) => todo.id === action.id);
-      const newTodo = {...state[index]};
-      newTodo.detail.push(action.detail);
-      const newState = [...state.filter((todo) => todo.id !== action.id)];
-      newState.push(newTodo);
+      const newTodo = {...state[index], detail: state[index].detail.concat(action.detail)};
 
-      return newState;
+      return sortTodoByDueTime([...state.filter((todo) => todo.id !== action.id)].concat(newTodo));
     }
     default:
       return state;
