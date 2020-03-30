@@ -1,28 +1,33 @@
 import React from 'react';
 import useTodos from '../../hooks/useTodos';
 import Todo from '../todo';
-import { todoStatus } from '../../modules/todos';
 
 import './Todolist.scss';
+import { todoStatus } from '../../modules/todos';
 
-const Todolist: React.FC = () => {
+type listProps = {
+  status: number;
+}
+
+const Todolist: React.FC<listProps> = ({status}: listProps) => {
   const todos = useTodos();
 
   let key = 0;
 
-  const progressList = todos.filter((todo) => todo.status === todoStatus.PROGRESS).map((todo) => (
-    <Todo todo={todo} key={key++} />
-  ));
-  const holdList = todos.filter((todo) => todo.status === todoStatus.HOLD).map((todo) => (
-    <Todo todo={todo} key={key++} />
-  ));
-  const doneList = todos.filter((todo) => todo.status === todoStatus.DONE).map((todo) => (
+  const list = todos.filter((todo) => todo.status === status).map((todo) => (
     <Todo todo={todo} key={key++} />
   ));
 
+  const clName = (
+    status === todoStatus.PROGRESS ? 'progress' :
+    (status === todoStatus.HOLD ? 'hold' : 'done')
+  );
+
   return (
     <div className="list">
-      <table className="list__table">
+      {
+        list.length > 0 ?
+        <table className="list__table">
         <thead>
           <tr>
             <th className="list__table__th__subject"></th>
@@ -32,23 +37,11 @@ const Todolist: React.FC = () => {
           </tr>
         </thead>
         <tbody>
-          {
-            progressList.length > 0 ?
-            <tr className="list__table__caption list__table__caption__progress"></tr> : null
-          }
-          {progressList}
-          {
-            holdList.length > 0 ?
-            <tr className="list__table__caption list__table__caption__hold"></tr> : null
-          }
-          {holdList}
-          {
-            doneList.length > 0 ?
-            <tr className="list__table__caption list__table__caption__done"></tr> : null
-          }
-          {doneList}
+          <tr className={`list__table__caption list__table__caption__${clName}`}></tr>
+          {list}
         </tbody>
-      </table>
+      </table> : null
+      }
     </div>
   );
 }
