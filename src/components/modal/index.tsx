@@ -6,6 +6,12 @@ import useAddTodo from '../../hooks/useAddTodo';
 let addCur: number = 0;
 let addDue: number = 0;
 
+const compareMoment = (timeA: string, timeB: string) => {
+  if (moment(timeA) > moment(timeB)) return 1;
+  else if (moment(timeA) < moment(timeB)) return -1;
+  else return 0;
+}
+
 const Modalform: React.FC = () => {
   const current = moment().format('YYYY-MM-DD');
 
@@ -29,7 +35,7 @@ const Modalform: React.FC = () => {
   };
 
   const [subject, setSubject] = useState('');
-  const handleChangeSubject = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangeSubject = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setSubject(e.target.value);
   }
 
@@ -73,7 +79,12 @@ const Modalform: React.FC = () => {
         <div className="modal">
           <div className="modal__caption">할 일 추가하기</div>
           <div className="modal__form">
-            <input type="text" onChange={handleChangeSubject} placeholder="제목" onKeyPress={handleKeyPress} autoFocus />
+            <textarea 
+              className="modal__form__input"
+              onChange={handleChangeSubject} 
+              placeholder="제목" 
+              onKeyPress={handleKeyPress} 
+              autoFocus />
             <div className="modal__form__wrapper">
               <p className="modal__form__wrapper__caption">시작 날짜</p>
               <p className="modal__form__wrapper__curTime">{cur}</p>
