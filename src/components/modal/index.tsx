@@ -3,8 +3,9 @@ import moment from 'moment';
 import './Modalform.scss';
 import useAddTodo from '../../hooks/useAddTodo';
 
-let addCur: number = 0;
-let addDue: number = 0;
+const current = moment().format('YYYY-MM-DD');
+let curTime = moment(current);
+let dueTime = moment(current);
 
 const compareMoment = (timeA: string, timeB: string) => {
   if (moment(timeA) > moment(timeB)) return 1;
@@ -13,25 +14,34 @@ const compareMoment = (timeA: string, timeB: string) => {
 }
 
 const Modalform: React.FC = () => {
-  const current = moment().format('YYYY-MM-DD');
-
-  const curTime = moment(current);
-  const dueTime = moment(current);
-
   const [cur, setCur] = useState(curTime.format('MM-DD'));
   const [due, setDue] = useState(dueTime.format('MM-DD'));
 
   const handleCurAddDay = () => {
-    setCur(curTime.add(++addCur, 'days').format('MM-DD'));
+    const tmpTime = moment(curTime);
+    tmpTime.add(1, 'days');
+    if (compareMoment(tmpTime.format('YYYY-MM-DD'), dueTime.format('YYYY-MM-DD')) !== 1) {
+      setCur(curTime.add(1, 'days').format('MM-DD'));
+    }
+    else {
+      return;
+    }
   };
   const handleCurSubDay = () => {
-    setCur(curTime.add(--addCur, 'days').format('MM-DD'));
+    setCur(curTime.add(-1, 'days').format('MM-DD'));
   };
   const handleDueAddDay = () => {
-    setDue(dueTime.add(++addDue, 'days').format('MM-DD'));
+    setDue(dueTime.add(1, 'days').format('MM-DD'));
   };
   const handleDueSubDay = () => {
-    setDue(dueTime.add(--addDue, 'days').format('MM-DD'));
+    const tmpTime = moment(dueTime);
+    tmpTime.add(-1, 'days');
+    if (compareMoment(curTime.format('YYYY-MM-DD'), tmpTime.format('YYYY-MM-DD')) !== 1) {
+      setDue(dueTime.add(-1, 'days').format('MM-DD'));
+    }
+    else {
+      return;
+    }
   };
 
   const [subject, setSubject] = useState('');
@@ -52,8 +62,6 @@ const Modalform: React.FC = () => {
     setSubject('');
     setCur(curTime.format('MM-DD'));
     setDue(dueTime.format('MM-DD'));
-    addCur = 0;
-    addDue = 0;
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
