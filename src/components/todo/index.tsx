@@ -62,27 +62,26 @@ const Todo = ({ todo }: todoProps) => {
 
   
   return (
-    <tr className="list__table__td">
-      <td className="list__table__td__subject" onDoubleClick={handleModifySubject}>
+    <tr className="list__table__row">
+      <td className="list__table__row__subject" onDoubleClick={handleModifySubject}>
         {
           dbSubject ?
           todo.subject :
           dbClickSubjectInput
         }
       </td>
-      <td className="list__table__td__detail">
-        <p className="list__table__td__detail__arrow_box">123</p>
+      <td className="list__table__row__detail">
         <Link to={todo.id.toString()}>
           <img src={comment} alt="comment" />
         </Link>
       </td>
-      <td className="list__table__td__start">
+      <td className="list__table__row__start">
         {todo.start}
       </td>
-      <td className="list__table__td__end">
+      <td className="list__table__row__end">
         {todo.end}
-        <button onClick={handleChangeStatus} className="list__table__td__end__btn-change">C</button>
-        <button onClick={handleDelTodo} className="list__table__td__end__btn-remove">&times;</button>
+        <button onClick={handleChangeStatus} className="list__table__row__end__btn-change">C</button>
+        <button onClick={handleDelTodo} className="list__table__row__end__btn-remove">&times;</button>
       </td>
     </tr>
   );
