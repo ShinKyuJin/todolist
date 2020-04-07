@@ -6,6 +6,9 @@ import useModifyTodo from '../../hooks/useModifyTodo';
 import useChangeTodoStatus from '../../hooks/useChangeTodoStatus';
 import useDelTodo from '../../hooks/useDelTodo';
 import { Link } from 'react-router-dom';
+import moment from 'moment';
+import useChangeTodoStart from '../../hooks/useChangeTodoStart';
+import useChangeTodoEnd from '../../hooks/useChangeTodoEnd';
 
 type todoProps = {
   todo: todo;
@@ -31,6 +34,9 @@ const Todo = ({ todo }: todoProps) => {
       handleConfirmSubject();
     }
   }
+
+  const cur = moment(todo.start).format('MM-DD');
+  const due = moment(todo.end).format('MM-DD');
 
   const dbClickSubjectInput = (
     <div>
@@ -60,7 +66,22 @@ const Todo = ({ todo }: todoProps) => {
     delTodo(todo.id);
   }
 
-  
+  const changeTodoStart = useChangeTodoStart();
+  const changeTodoEnd = useChangeTodoEnd();
+  const handleChangeStartlt = () => {
+    changeTodoStart(todo.id, -1);
+  }
+  const handleChangeStartgt = () => {
+    changeTodoStart(todo.id, 1);
+  }
+  const handleChangeEndlt = () => {
+    changeTodoEnd(todo.id, -1);
+  }
+  const handleChangeEndgt = () => {
+    changeTodoEnd(todo.id, 1);
+  }
+
+
   return (
     <tr className="list__table__row">
       <td className="list__table__row__subject" onDoubleClick={handleModifySubject}>
@@ -75,13 +96,17 @@ const Todo = ({ todo }: todoProps) => {
           <img src={comment} alt="comment" />
         </Link>
       </td>
-      <td className="list__table__row__start">
-        {todo.start}
+      <td className="list__table__td__start">
+        <span onClick={handleChangeStartlt}>&lt;</span>
+        {cur}
+        <span onClick={handleChangeStartgt}>&gt;</span>
       </td>
-      <td className="list__table__row__end">
-        {todo.end}
-        <button onClick={handleChangeStatus} className="list__table__row__end__btn-change">C</button>
-        <button onClick={handleDelTodo} className="list__table__row__end__btn-remove">&times;</button>
+      <td className="list__table__td__end">
+        <span onClick={handleChangeEndlt}>&lt;</span>
+        {due}
+        <span onClick={handleChangeEndgt}>&gt;</span>
+        <button onClick={handleChangeStatus} className="list__table__td__end__btn-change">C</button>
+        <button onClick={handleDelTodo} className="list__table__td__end__btn-remove">&times;</button>
       </td>
     </tr>
   );
