@@ -8,7 +8,7 @@
   left: 0;
   bottom: 0;
   right: 0;
-  background-color: rgba(0, 0, 0, 0.16);
+  background-color: $modal-overlay-background-color;
 }
 
 .modal {
@@ -20,8 +20,9 @@
   transform: translate(-50%, -50%);
   padding: 0 70px 70px 70px;
   
-  background-color: white;
+  background-color: $modal-background-color;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+  border: 6px solid $modal-border-color;
   
   &__caption {
     padding: 30px 30px 30px 0;
@@ -31,66 +32,38 @@
 
   &__form {
 
-    & > input {
-      width: 100%;
-      height: 50px;
+    &__input {
+      float: right;
+      width: 400px;
+      height: 230px;
+      resize: none;
+      background-color: $modal-input-background-color;
+      transition: background-color 0.2s ease 0s;
+      border: 1px dotted $modal-form-border-color;
       font-size: 16px;
-      text-align: center;
-      border: none;
-      border-bottom: 2px solid #DDD;
-      
+
       &:focus {
         outline: none;
+        background-color: $modal-input-background-color-focus;
       }
     }
 
     &__wrapper {
-      display: inline-block;
-      width: 40%;
-      text-align: center;
-      margin-top: 30px;
-      background-color: $modal-wrapper-background-color;
-      padding: 5%;
-      padding-top: 10px;
-
-      &__caption {
-        font-size: 16px;
-      }
-
 
       & > button {
-        border: none;
-        padding: 5px 15px;
-        font-size: 18px;
+        width: 50px;
+        height: 25px;
         
-        &:hover {
-          background-color: black;
-          color: white;
-        }
-        
-        &:focus {
-          outline: none;
+        & + & {
+          border: 1px solid black;
         }
       }
     }
 
     &__add {
-      width: 100%;
-      height: 50px;
-      border: none;
-      background-color: $done-caption-color;
-      color: white;
-      font-size: 16px;
-      margin-top: 40px;
-
-      &:focus {
-        outline: none;
-      }
-
-      &:hover {
-        background-color: darken($done-caption-color, 10);
-        cursor: pointer;
-      }
+      margin-top: 15px;
+      width: 100px;
+      height: 25px;
     }
   }
 }
@@ -103,13 +76,13 @@
   height: 50px;
   border-radius: 35px 35px;
   border: none;
-  border: 1px solid black;
-  background-color: white;
+  border: 1px solid $btn-modal-border-color;
+  background-color: $btn-modal-background-color;
   font-size: 24px;
 
   &:hover {
-    border: 1px solid white;
-    background-color: black;
+    border: 1px solid $btn-modal-background-color;
+    background-color: $btn-modal-border-color;
     color: white;
     cursor: pointer;
   }
