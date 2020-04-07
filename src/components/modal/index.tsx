@@ -3,33 +3,49 @@ import moment from 'moment';
 import './Modalform.scss';
 import useAddTodo from '../../hooks/useAddTodo';
 
-let addCur: number = 0;
-let addDue: number = 0;
+const current = moment().format('YYYY-MM-DD');
+let curTime = moment(current);
+let dueTime = moment(current);
+
+const compareMoment = (timeA: string, timeB: string) => {
+  if (moment(timeA) > moment(timeB)) return 1;
+  else if (moment(timeA) < moment(timeB)) return -1;
+  else return 0;
+}
 
 const Modalform: React.FC = () => {
-  const current = moment().format('YYYY-MM-DD');
-
-  const curTime = moment(current);
-  const dueTime = moment(current);
-
   const [cur, setCur] = useState(curTime.format('MM-DD'));
   const [due, setDue] = useState(dueTime.format('MM-DD'));
 
   const handleCurAddDay = () => {
-    setCur(curTime.add(++addCur, 'days').format('MM-DD'));
+    const tmpTime = moment(curTime);
+    tmpTime.add(1, 'days');
+    if (compareMoment(tmpTime.format('YYYY-MM-DD'), dueTime.format('YYYY-MM-DD')) !== 1) {
+      setCur(curTime.add(1, 'days').format('MM-DD'));
+    }
+    else {
+      return;
+    }
   };
   const handleCurSubDay = () => {
-    setCur(curTime.add(--addCur, 'days').format('MM-DD'));
+    setCur(curTime.add(-1, 'days').format('MM-DD'));
   };
   const handleDueAddDay = () => {
-    setDue(dueTime.add(++addDue, 'days').format('MM-DD'));
+    setDue(dueTime.add(1, 'days').format('MM-DD'));
   };
   const handleDueSubDay = () => {
-    setDue(dueTime.add(--addDue, 'days').format('MM-DD'));
+    const tmpTime = moment(dueTime);
+    tmpTime.add(-1, 'days');
+    if (compareMoment(curTime.format('YYYY-MM-DD'), tmpTime.format('YYYY-MM-DD')) !== 1) {
+      setDue(dueTime.add(-1, 'days').format('MM-DD'));
+    }
+    else {
+      return;
+    }
   };
 
   const [subject, setSubject] = useState('');
-  const handleChangeSubject = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangeSubject = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setSubject(e.target.value);
   }
 
@@ -42,12 +58,12 @@ const Modalform: React.FC = () => {
   const addTodo = useAddTodo();
   const handleClickAdd = () => {
     addTodo(subject, cur, due);
+    curTime = moment(current);
+    dueTime = moment(current);
     setClick(!click);
     setSubject('');
     setCur(curTime.format('MM-DD'));
     setDue(dueTime.format('MM-DD'));
-    addCur = 0;
-    addDue = 0;
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
@@ -73,18 +89,23 @@ const Modalform: React.FC = () => {
         <div className="modal">
           <div className="modal__caption">할 일 추가하기</div>
           <div className="modal__form">
-            <input type="text" onChange={handleChangeSubject} placeholder="제목" onKeyPress={handleKeyPress} autoFocus />
+            <textarea 
+              className="modal__form__input"
+              onChange={handleChangeSubject} 
+              placeholder="제목" 
+              onKeyPress={handleKeyPress} 
+              autoFocus />
             <div className="modal__form__wrapper">
               <p className="modal__form__wrapper__caption">시작 날짜</p>
               <p className="modal__form__wrapper__curTime">{cur}</p>
-              <button type="button" onClick={handleCurAddDay}>+1</button>
-              <button type="button" onClick={handleCurSubDay}>-1</button>
+              <button type="button" onClick={handleCurAddDay}>+</button>
+              <button type="button" onClick={handleCurSubDay}>-</button>
             </div>
             <div className="modal__form__wrapper">
               <p className="modal__form__wrapper__caption">마감 날짜</p>
               <p className="modal__form__wrapper__dueTime">{due}</p>
-              <button type="button" onClick={handleDueAddDay}>+1</button>
-              <button type="button" onClick={handleDueSubDay}>-1</button>
+              <button type="button" onClick={handleDueAddDay}>+</button>
+              <button type="button" onClick={handleDueSubDay}>-</button>
             </div>
             <button type="button" onClick={handleClickAdd} className="modal__form__add">추가</button>
           </div>

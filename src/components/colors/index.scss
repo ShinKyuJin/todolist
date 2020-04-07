@@ -1,17 +1,54 @@
+/* ---------------body---------------- */
 /* body color */
 $bg-color: #EFEFEF;
 
+/* -------------template-------------- */
 /* template color */
 $template-bg-color: white;
 $template-name-color: #AAA;
 
-/* todo detail modal color */
-$arrow-box-color: #c2e1f5;
+/* ---------------modal---------------- */
+/* modal add btn color */
+$modal-add-color: #F2AB39;
+
+/* modal background color */
+$modal-background-color: white;
+
+/* modal overlay background color */
+$modal-overlay-background-color: rgba(0, 0, 0, 0.16);
+
+/* modal wrapper background color */
+$modal-wrapper-background-color: #FAFAFA;
+
+/* modal border color */
+$modal-border-color: yellowgreen;
+
+/* modal input background color */
+$modal-input-background-color: #DEDEDE;
+$modal-input-background-color-focus: white;
+
+/* modal form border color */
+$modal-form-border-color: #DDDDDD;
+
+/* btn modal background color */
+$btn-modal-background-color: white;
+
+/* btn modal border color */
+$btn-modal-border-color: black;
+
+/* ---------------list---------------- */
+/* list th font color */
+$list-th-color: #AAA;
+
+/* ---------------todo---------------- */
+/* todo background color */
+$todo-background-color: white;
 
 /* todo caption color */
 $progress-caption-color: #A875FF;
 $hold-caption-color: #F9D900;
 $done-caption-color: #2ECD6F;
 
-/* modal add btn color */
-$modal-add-color: #F2AB39;
+/* todo btn */
+$todo-btn-change-color: blue;
+$todo-btn-remove-color: red;

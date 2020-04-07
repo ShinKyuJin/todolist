@@ -26,9 +26,9 @@ const Todolist: React.FC = () => {
         <thead>
           <tr>
             <th className="list__table__th__subject"></th>
-            <th className="list__table__th__start">detail</th>
-            <th className="list__table__th__start">Updated</th>
-            <th className="list__table__th__end">Due Date</th>
+            <th className="list__table__th__detail">상세</th>
+            <th className="list__table__th__start">시작</th>
+            <th className="list__table__th__end">마감</th>
           </tr>
         </thead>
         <tbody>

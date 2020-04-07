@@ -19,16 +19,22 @@
         padding: 10px;
       }
 
+      &__detail {
+        padding: 10px;
+        width: 150px;
+        color: $list-th-color;
+      }
+
       &__start {
         padding: 10px;
         width: 150px;
-        color: #AAA;
+        color: $list-th-color;
       }
 
       &__end {
         padding: 10px;
         width: 150px;
-        color: #AAA;
+        color: $list-th-color;
       }
     }
 
@@ -46,7 +52,7 @@
         left: 1px;
         width: 150px;
         color: white;
-        content: 'Progressing';
+        content: '진행 중';
         background-color: $progress-caption-color;
       }
       
@@ -58,7 +64,7 @@
         left: 1px;
         width: 150px;
         color: white;
-        content: 'on Holding';
+        content: '보류';
         background-color: $hold-caption-color;
       }
 
@@ -70,7 +76,7 @@
         left: 1px;
         width: 150px;
         color: white;
-        content: 'Done';
+        content: '완료';
         background-color: $done-caption-color;
       }
     }
