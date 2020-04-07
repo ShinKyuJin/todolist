@@ -87,7 +87,7 @@ const Todo = ({ todo }: todoProps) => {
       <td className="list__table__row__subject" onDoubleClick={handleModifySubject}>
         {
           dbSubject ?
-          todo.subject :
+          <p>{todo.subject}</p> :
           dbClickSubjectInput
         }
       </td>
